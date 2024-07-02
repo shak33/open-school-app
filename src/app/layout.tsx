@@ -1,12 +1,16 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
+
+import ReactQueryProvider from '../../providers/ReactQueryProvider';
+
+import { Navbar } from '@/components/Navbar/Navbar.comp';
 
 export const metadata: Metadata = {
-  title: "Open School",
-  description: "Manage your school(s) with ease",
+  title: 'Open School',
+  description: 'Manage your school(s) with ease',
 };
 
 export default function RootLayout({
@@ -15,8 +19,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ReactQueryProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <Navbar />
+          {children}
+        </body>
+      </html>
+    </ReactQueryProvider>
   );
 }
