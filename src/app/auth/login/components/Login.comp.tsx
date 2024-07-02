@@ -16,15 +16,19 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useLogin } from '@/app/auth/login/utils/useLogin.util';
+import Cookies from 'js-cookie';
 
 export const Login = () => {
+  const { login } = useLogin();
   const formMethods = useForm<LoginFormModel>({
     defaultValues: initialLoginFormValues,
     resolver: zodResolver(loginFormValidation),
   });
 
   const handleSubmit: SubmitHandler<LoginFormModel> = async (form) => {
-    console.log(form);
+    const { data } = await login(form);
+    Cookies.set('token', data.token);
   };
 
   return (
@@ -54,7 +58,11 @@ export const Login = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your password" {...field} />
+                  <Input
+                    placeholder="Enter your password"
+                    type="password"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -4,6 +4,8 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
+import ReactQueryProvider from '../../providers/ReactQueryProvider';
+
 import { Navbar } from '@/components/Navbar/Navbar.comp';
 
 export const metadata: Metadata = {
@@ -17,11 +19,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        {children}
-      </body>
-    </html>
+    <ReactQueryProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <Navbar />
+          {children}
+        </body>
+      </html>
+    </ReactQueryProvider>
   );
 }
