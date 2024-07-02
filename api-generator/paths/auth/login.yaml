@@ -1,0 +1,55 @@
+login:
+  post:
+    tags:
+      - Auth
+    summary: Login
+    operationId: login
+    requestBody:
+      $ref: '#/components/requestBodies/LoginRequest'
+    responses:
+      200:
+        $ref: '#/components/responses/LoginResponse'
+components:
+  requestBodies:
+    LoginRequest:
+      description: Login request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginRequest'
+  responses:
+    LoginResponse:
+      description: Login response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginResponse'
+  schemas:
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+    LoginResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            token:
+              type: string
+              required:
+                - token
+        message:
+          type: string
+        success:
+          type: boolean 
+      required:
+        - data
+        - message
+        - success
