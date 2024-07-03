@@ -1,0 +1,46 @@
+me:
+  get:
+    tags:
+      - Me
+    summary: Me
+    operationId: Me
+    responses:
+      200:
+        $ref: '#/components/responses/MeResponse'
+components:
+  responses:
+    MeResponse:
+      description: Me response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MeResponse'
+  schemas:
+    MeResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            _id: 
+              type: string
+            email:
+              type: string
+              required:
+                - token
+            firstName:
+              type: string
+            lastName:
+              type: string
+            roles: 
+              type: array
+              items:
+                type: string
+        message:
+          type: string
+        success:
+          type: boolean 
+      required:
+        - data
+        - message
+        - success

@@ -25,6 +25,6 @@ export interface LoginResponseDataDto {
      * @type {string}
      * @memberof LoginResponseDataDto
      */
-    'token': string;
+    'token'?: string;
 }
 

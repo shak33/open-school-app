@@ -1,8 +1,13 @@
+'use client';
+
 import Link from 'next/link';
+import { useGetCurrentUserStore } from '@/models/CurrentUser.model';
 
 import { Button } from '@/components/ui/button';
 
 export const Navbar = () => {
+  const { currentUser } = useGetCurrentUserStore();
+
   return (
     <div className="flex justify-between items-center p-4 bg-white text-black shadow-md mb-[50px]">
       <div className="flex items-center space-x-4">
@@ -20,14 +25,27 @@ export const Navbar = () => {
           </Button>
         </div>
       </div>
-      <div className="flex items-center space-x-4">
-        <Button variant="link" className="text-base hover:underline">
-          <Link href="/auth/login">Login</Link>
-        </Button>
-        <Button variant="link" className="text-base hover:underline">
-          <Link href="#">Register</Link>
-        </Button>
-      </div>
+      {currentUser ? (
+        <div className="flex items-center space-x-4">
+          <Button variant="link" className="text-base hover:underline">
+            <Link href="#">
+              Profile ({currentUser.firstName} {currentUser.lastName})
+            </Link>
+          </Button>
+          <Button variant="link" className="text-base hover:underline">
+            <Link href="#">Logout</Link>
+          </Button>
+        </div>
+      ) : (
+        <div className="flex items-center space-x-4">
+          <Button variant="link" className="text-base hover:underline">
+            <Link href="/auth/login">Login</Link>
+          </Button>
+          <Button variant="link" className="text-base hover:underline">
+            <Link href="#">Register</Link>
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

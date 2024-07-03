@@ -18,6 +18,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { useLogin } from '@/app/auth/login/utils/useLogin.util';
 import Cookies from 'js-cookie';
+import { useGetCurrentUserStore } from '@/models/CurrentUser.model';
+import { redirect } from 'next/navigation';
 
 export const Login = () => {
   const { login } = useLogin();
@@ -25,11 +27,19 @@ export const Login = () => {
     defaultValues: initialLoginFormValues,
     resolver: zodResolver(loginFormValidation),
   });
+  const { currentUser } = useGetCurrentUserStore();
 
   const handleSubmit: SubmitHandler<LoginFormModel> = async (form) => {
     const { data } = await login(form);
-    Cookies.set('token', data.token);
+
+    if (data?.token) {
+      Cookies.set('token', data.token);
+    }
   };
+
+  if (currentUser) {
+    redirect('/');
+  }
 
   return (
     <Form {...formMethods}>
