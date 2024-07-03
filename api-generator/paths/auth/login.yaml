@@ -40,11 +40,37 @@ components:
       properties:
         data:
           type: object
+          required:
+            - token
+            - user
           properties:
             token:
               type: string
+            required:
+              - token
+            user:
+              type: object
+              properties:
+                _id: 
+                  type: string
+                email:
+                  type: string
+                  required:
+                    - token
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                roles: 
+                  type: array
+                  items:
+                    type: string
               required:
-                - token
+                - _id
+                - email
+                - firstName
+                - lastName
+                - roles
         message:
           type: string
         success:

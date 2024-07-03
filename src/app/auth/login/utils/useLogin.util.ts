@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { LoginRequestDto, LoginResponseDto } from '@/api/generated/models';
+import { LoginRequestDto, LoginResponseDataDto } from '@/api/generated/models';
 import { useAuthApiClient } from '@/api/utils/useAuthApiClient.util';
 
 type Return = {
-  login: (req: LoginRequestDto) => Promise<LoginResponseDto>;
+  login: (req: LoginRequestDto) => Promise<LoginResponseDataDto>;
   isLoginLoading: boolean;
   isLoginError: boolean;
 };
@@ -13,7 +13,7 @@ export const useLogin = (): Return => {
   const { authApiClient } = useAuthApiClient();
 
   const { mutateAsync, isPending, isError } = useMutation<
-    LoginResponseDto,
+    LoginResponseDataDto,
     AxiosError,
     LoginRequestDto
   >({
@@ -23,7 +23,7 @@ export const useLogin = (): Return => {
         password: req.password,
       });
 
-      return data;
+      return data.data;
     },
   });
 
