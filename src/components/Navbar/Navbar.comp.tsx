@@ -2,11 +2,17 @@
 
 import Link from 'next/link';
 import { useGetCurrentUserStore } from '@/models/CurrentUser.model';
+import Cookies from 'js-cookie';
 
 import { Button } from '@/components/ui/button';
 
 export const Navbar = () => {
   const { currentUser } = useGetCurrentUserStore();
+
+  const onLogoutClick = () => {
+    Cookies.remove('token');
+    window.location.reload();
+  };
 
   return (
     <div className="flex justify-between items-center p-4 bg-white text-black shadow-md mb-[50px]">
@@ -32,8 +38,12 @@ export const Navbar = () => {
               Profile ({currentUser.firstName} {currentUser.lastName})
             </Link>
           </Button>
-          <Button variant="link" className="text-base hover:underline">
-            <Link href="#">Logout</Link>
+          <Button
+            variant="link"
+            className="text-base hover:underline"
+            onClick={onLogoutClick}
+          >
+            Logout
           </Button>
         </div>
       ) : (
