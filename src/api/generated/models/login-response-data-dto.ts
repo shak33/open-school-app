@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { LoginResponseDataUserDto } from './login-response-data-user-dto';
 
 /**
  * 
@@ -25,6 +28,12 @@ export interface LoginResponseDataDto {
      * @type {string}
      * @memberof LoginResponseDataDto
      */
-    'token'?: string;
+    'token': string;
+    /**
+     * 
+     * @type {LoginResponseDataUserDto}
+     * @memberof LoginResponseDataDto
+     */
+    'user': LoginResponseDataUserDto;
 }
 

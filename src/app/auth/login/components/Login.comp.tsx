@@ -27,14 +27,13 @@ export const Login = () => {
     defaultValues: initialLoginFormValues,
     resolver: zodResolver(loginFormValidation),
   });
-  const { currentUser } = useGetCurrentUserStore();
+  const { currentUser, setCurrentUser } = useGetCurrentUserStore();
 
   const handleSubmit: SubmitHandler<LoginFormModel> = async (form) => {
-    const { data } = await login(form);
+    const data = await login(form);
 
-    if (data?.token) {
-      Cookies.set('token', data.token);
-    }
+    Cookies.set('token', data.token);
+    setCurrentUser(data.user);
   };
 
   if (currentUser) {
