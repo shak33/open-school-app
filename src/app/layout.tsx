@@ -4,9 +4,9 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-import ReactQueryProvider from '../../providers/ReactQueryProvider';
+import ReactQueryProvider from '../providers/ReactQueryProvider';
 
-import { Navbar } from '@/components/Navbar/Navbar.comp';
+import { LayoutController } from './layout.controller';
 
 export const metadata: Metadata = {
   title: 'Open School',
@@ -22,8 +22,7 @@ export default function RootLayout({
     <ReactQueryProvider>
       <html lang="en">
         <body className={inter.className}>
-          <Navbar />
-          {children}
+          <LayoutController>{children}</LayoutController>
         </body>
       </html>
     </ReactQueryProvider>

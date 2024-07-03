@@ -15,4 +15,5 @@
 
 
 export * from './apis/auth-api';
+export * from './apis/me-api';
 
