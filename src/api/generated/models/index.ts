@@ -4,3 +4,7 @@ export * from './login-response-data-user-dto';
 export * from './login-response-dto';
 export * from './me-response-data-dto';
 export * from './me-response-dto';
+export * from './register-request-dto';
+export * from './register-response-data-dto';
+export * from './register-response-data-user-dto';
+export * from './register-response-dto';

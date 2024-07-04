@@ -20,7 +20,7 @@ export const Navbar = () => {
         <div className="text-2xl font-bold">Open School</div>
         <div className="flex items-center space-x-4">
           <Button variant="link" className="text-base hover:underline">
-            <Link href="#" className="hover:underline">
+            <Link href="/" className="hover:underline">
               Home
             </Link>
           </Button>
@@ -52,7 +52,7 @@ export const Navbar = () => {
             <Link href="/auth/login">Login</Link>
           </Button>
           <Button variant="link" className="text-base hover:underline">
-            <Link href="#">Register</Link>
+            <Link href="/auth/register">Register</Link>
           </Button>
         </div>
       )}
