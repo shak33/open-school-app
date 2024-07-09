@@ -1,41 +1,47 @@
-login:
+register:
   post:
     tags:
       - Auth
-    summary: Login
-    operationId: login
+    summary: Register
+    operationId: register
     requestBody:
-      $ref: '#/components/requestBodies/LoginRequest'
+      $ref: '#/components/requestBodies/RegisterRequest'
     responses:
       200:
-        $ref: '#/components/responses/LoginResponse'
+        $ref: '#/components/responses/RegisterResponse'
 components:
   requestBodies:
-    LoginRequest:
-      description: Login request
+    RegisterRequest:
+      description: Register request
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/LoginRequest'
+            $ref: '#/components/schemas/RegisterRequest'
   responses:
-    LoginResponse:
-      description: Login response
+    RegisterResponse:
+      description: Register response
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/LoginResponse'
+            $ref: '#/components/schemas/RegisterResponse'
   schemas:
-    LoginRequest:
+    RegisterRequest:
       type: object
       properties:
         email:
           type: string
         password:
           type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
       required:
-        - username
+        - email
         - password
-    LoginResponse:
+        - firstName
+        - lastName
+    RegisterResponse:
       type: object
       properties:
         data:
@@ -55,8 +61,6 @@ components:
                   type: string
                 email:
                   type: string
-                  required:
-                    - token
                 firstName:
                   type: string
                 lastName:
@@ -79,3 +83,4 @@ components:
         - data
         - message
         - success
+

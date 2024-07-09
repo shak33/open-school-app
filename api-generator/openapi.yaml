@@ -8,6 +8,8 @@ paths:
     $ref: "./paths/me/me.yaml#/me"
   /api/v1/auth/login:
     $ref: "./paths/auth/login.yaml#/login"
+  /api/v1/auth/register:
+    $ref: "./paths/auth/register.yaml#/register"
   /api/v1/schools/{schoolId}:
     $ref: "./paths/schools/schools.yaml#/get-school"
   /api/v1/schools/list:
@@ -18,4 +20,3 @@ paths:
     $ref: "./paths/schools/schools.yaml#/update-school"
   /api/v1/schools/delete/{schoolId}:
     $ref: "./paths/schools/schools.yaml#/delete-school"
-    
