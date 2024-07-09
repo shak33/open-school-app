@@ -10,3 +10,5 @@ paths:
     $ref: "./paths/auth/login.yaml#/login"
   /api/v1/schools/list:
     $ref: "./paths/schools/schools.yaml#/get-schools"
+  /api/v1/schools/create:
+    $ref: "./paths/schools/schools.yaml#/create-school"

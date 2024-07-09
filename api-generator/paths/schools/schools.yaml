@@ -12,7 +12,25 @@ get-schools:
     responses:
       200:
         $ref: '#/components/responses/GetSchoolsResponse'
+create-school:
+  post:
+    tags:
+      - Schools
+    summary: Create school
+    operationId: CreateSchool
+    requestBody:
+      $ref: '#/components/requestBodies/CreateSchoolRequest'
+    responses:
+      200:
+        $ref: '#/components/responses/CreateSchoolResponse'
 components:
+  requestBodies:
+    CreateSchoolRequest:
+      description: Create school request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateSchoolRequest'
   parameters:
     schoolsSearchSortBy:
       name: sortBy
@@ -27,6 +45,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/GetSchoolsResponse'
+    CreateSchoolResponse:
+      description: Create school response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateSchoolResponse'
   schemas:
     GetSchoolsResponse:
       type: object
@@ -66,3 +90,31 @@ components:
       enum:
         - NAME
         - CITY
+    CreateSchoolRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        zip:
+          type: string
+      required:
+        - name
+        - addressLine1
+        - city
+        - zip
+    CreateSchoolResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+        - message
+        - success

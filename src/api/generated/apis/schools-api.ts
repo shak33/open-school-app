@@ -22,6 +22,10 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import type { CreateSchoolRequestDto } from '../models';
+// @ts-ignore
+import type { CreateSchoolResponseDto } from '../models';
+// @ts-ignore
 import type { GetSchoolsResponseDto } from '../models';
 // @ts-ignore
 import type { SchoolsSearchSortByDto } from '../models';
@@ -33,6 +37,40 @@ import type { SortDirectionDto } from '../models';
  */
 export const SchoolsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @summary Create school
+         * @param {CreateSchoolRequestDto} [createSchoolRequestDto] Create school request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSchool: async (createSchoolRequestDto?: CreateSchoolRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/schools/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createSchoolRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @summary Get schools
@@ -99,6 +137,19 @@ export const SchoolsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Create school
+         * @param {CreateSchoolRequestDto} [createSchoolRequestDto] Create school request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createSchool(createSchoolRequestDto?: CreateSchoolRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateSchoolResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createSchool(createSchoolRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SchoolsApi.createSchool']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get schools
          * @param {number} pageSize 
          * @param {number} page 
@@ -125,6 +176,16 @@ export const SchoolsApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
+         * @summary Create school
+         * @param {CreateSchoolRequestDto} [createSchoolRequestDto] Create school request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSchool(createSchoolRequestDto?: CreateSchoolRequestDto, options?: any): AxiosPromise<CreateSchoolResponseDto> {
+            return localVarFp.createSchool(createSchoolRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get schools
          * @param {number} pageSize 
          * @param {number} page 
@@ -147,6 +208,16 @@ export const SchoolsApiFactory = function (configuration?: Configuration, basePa
 export interface SchoolsApiInterface {
     /**
      * 
+     * @summary Create school
+     * @param {CreateSchoolRequestDto} [createSchoolRequestDto] Create school request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SchoolsApiInterface
+     */
+    createSchool(createSchoolRequestDto?: CreateSchoolRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<CreateSchoolResponseDto>;
+
+    /**
+     * 
      * @summary Get schools
      * @param {number} pageSize 
      * @param {number} page 
@@ -167,6 +238,18 @@ export interface SchoolsApiInterface {
  * @extends {BaseAPI}
  */
 export class SchoolsApi extends BaseAPI implements SchoolsApiInterface {
+    /**
+     * 
+     * @summary Create school
+     * @param {CreateSchoolRequestDto} [createSchoolRequestDto] Create school request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SchoolsApi
+     */
+    public createSchool(createSchoolRequestDto?: CreateSchoolRequestDto, options?: RawAxiosRequestConfig) {
+        return SchoolsApiFp(this.configuration).createSchool(createSchoolRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary Get schools
