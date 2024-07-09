@@ -23,6 +23,19 @@ create-school:
     responses:
       200:
         $ref: '#/components/responses/CreateSchoolResponse'
+update-school:
+  patch:
+    tags:
+      - Schools
+    summary: Update school
+    operationId: UpdateSchool
+    parameters:
+      - $ref: '#/components/parameters/schoolId'
+    requestBody:
+      $ref: '#/components/requestBodies/UpdateSchoolRequest'
+    responses:
+      200:
+        $ref: '#/components/responses/UpdateSchoolResponse'
 components:
   requestBodies:
     CreateSchoolRequest:
@@ -31,7 +44,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/CreateSchoolRequest'
+    UpdateSchoolRequest:
+      description: Update school request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateSchoolRequest'
   parameters:
+    schoolId:
+      name: schoolId
+      in: path
+      description: School id
+      required: true
+      schema:
+        type: string
     schoolsSearchSortBy:
       name: sortBy
       in: query
@@ -45,6 +71,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/GetSchoolsResponse'
+    UpdateSchoolResponse:
+      description: Update school response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateSchoolResponse'
     CreateSchoolResponse:
       description: Create school response
       content:
@@ -109,6 +141,34 @@ components:
         - city
         - zip
     CreateSchoolResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+        - message
+        - success
+    UpdateSchoolRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        zip:
+          type: string
+      required:
+        - name
+        - addressLine1
+        - city
+        - zip
+    UpdateSchoolResponse:
       type: object
       properties:
         message:

@@ -10,3 +10,5 @@ export * from './me-response-dto';
 export * from './school-dto';
 export * from './schools-search-sort-by-dto';
 export * from './sort-direction-dto';
+export * from './update-school-request-dto';
+export * from './update-school-response-dto';
