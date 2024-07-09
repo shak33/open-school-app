@@ -1,6 +1,7 @@
 export * from './create-school-request-dto';
 export * from './create-school-response-dto';
 export * from './delete-school-response-dto';
+export * from './get-school-response-dto';
 export * from './get-schools-response-dto';
 export * from './login-request-dto';
 export * from './login-response-data-dto';

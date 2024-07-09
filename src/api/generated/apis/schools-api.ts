@@ -28,6 +28,8 @@ import type { CreateSchoolResponseDto } from '../models';
 // @ts-ignore
 import type { DeleteSchoolResponseDto } from '../models';
 // @ts-ignore
+import type { GetSchoolResponseDto } from '../models';
+// @ts-ignore
 import type { GetSchoolsResponseDto } from '../models';
 // @ts-ignore
 import type { SchoolsSearchSortByDto } from '../models';
@@ -97,6 +99,40 @@ export const SchoolsApiAxiosParamCreator = function (configuration?: Configurati
             }
 
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get school
+         * @param {string} schoolId School id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSchool: async (schoolId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'schoolId' is not null or undefined
+            assertParamExists('getSchool', 'schoolId', schoolId)
+            const localVarPath = `/api/v1/schools/{schoolId}`
+                .replace(`{${"schoolId"}}`, encodeURIComponent(String(schoolId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -241,6 +277,19 @@ export const SchoolsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Get school
+         * @param {string} schoolId School id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSchool(schoolId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetSchoolResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSchool(schoolId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SchoolsApi.getSchool']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get schools
          * @param {number} pageSize 
          * @param {number} page 
@@ -301,6 +350,16 @@ export const SchoolsApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary Get school
+         * @param {string} schoolId School id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSchool(schoolId: string, options?: any): AxiosPromise<GetSchoolResponseDto> {
+            return localVarFp.getSchool(schoolId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get schools
          * @param {number} pageSize 
          * @param {number} page 
@@ -351,6 +410,16 @@ export interface SchoolsApiInterface {
      * @memberof SchoolsApiInterface
      */
     deleteSchool(schoolId: string, options?: RawAxiosRequestConfig): AxiosPromise<DeleteSchoolResponseDto>;
+
+    /**
+     * 
+     * @summary Get school
+     * @param {string} schoolId School id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SchoolsApiInterface
+     */
+    getSchool(schoolId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetSchoolResponseDto>;
 
     /**
      * 
@@ -407,6 +476,18 @@ export class SchoolsApi extends BaseAPI implements SchoolsApiInterface {
      */
     public deleteSchool(schoolId: string, options?: RawAxiosRequestConfig) {
         return SchoolsApiFp(this.configuration).deleteSchool(schoolId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get school
+     * @param {string} schoolId School id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SchoolsApi
+     */
+    public getSchool(schoolId: string, options?: RawAxiosRequestConfig) {
+        return SchoolsApiFp(this.configuration).getSchool(schoolId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
