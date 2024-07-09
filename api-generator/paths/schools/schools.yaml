@@ -1,0 +1,237 @@
+get-schools:
+  get:
+    tags:
+      - Schools
+    summary: Get schools
+    operationId: GetSchools
+    parameters:
+      - $ref: '../commons.yaml#/components/parameters/pageSize'
+      - $ref: '../commons.yaml#/components/parameters/page'
+      - $ref: '../commons.yaml#/components/parameters/sortOrder'
+      - $ref: '#/components/parameters/schoolsSearchSortBy'
+    responses:
+      200:
+        $ref: '#/components/responses/GetSchoolsResponse'
+get-school:
+  get:
+    tags:
+      - Schools
+    summary: Get school
+    operationId: GetSchool
+    parameters:
+      - $ref: '#/components/parameters/schoolId'
+    responses:
+      200:
+        $ref: '#/components/responses/GetSchoolResponse'
+create-school:
+  post:
+    tags:
+      - Schools
+    summary: Create school
+    operationId: CreateSchool
+    requestBody:
+      $ref: '#/components/requestBodies/CreateSchoolRequest'
+    responses:
+      200:
+        $ref: '#/components/responses/CreateSchoolResponse'
+update-school:
+  patch:
+    tags:
+      - Schools
+    summary: Update school
+    operationId: UpdateSchool
+    parameters:
+      - $ref: '#/components/parameters/schoolId'
+    requestBody:
+      $ref: '#/components/requestBodies/UpdateSchoolRequest'
+    responses:
+      200:
+        $ref: '#/components/responses/UpdateSchoolResponse'
+delete-school:
+  delete:
+    tags:
+      - Schools
+    summary: Delete school
+    operationId: DeleteSchool
+    parameters:
+      - $ref: '#/components/parameters/schoolId'
+    responses:
+      200:
+        $ref: '#/components/responses/DeleteSchoolResponse'
+components:
+  requestBodies:
+    CreateSchoolRequest:
+      description: Create school request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateSchoolRequest'
+    UpdateSchoolRequest:
+      description: Update school request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateSchoolRequest'
+  parameters:
+    schoolId:
+      name: schoolId
+      in: path
+      description: School id
+      required: true
+      schema:
+        type: string
+    schoolsSearchSortBy:
+      name: sortBy
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/SchoolsSearchSortBy'
+  responses:
+    GetSchoolsResponse:
+      description: Get schools response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetSchoolsResponse'
+    GetSchoolResponse:
+      description: Get school response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetSchoolResponse'
+    UpdateSchoolResponse:
+      description: Update school response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateSchoolResponse'
+    CreateSchoolResponse:
+      description: Create school response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateSchoolResponse'
+    DeleteSchoolResponse:
+      description: Delete school response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeleteSchoolResponse'
+  schemas:
+    GetSchoolsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/School'
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+        - data
+        - message
+        - success
+    GetSchoolResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/School'
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+        - data
+        - message
+        - success
+    School:
+      type: object
+      properties:
+        name:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        zip:
+          type: string
+      required:
+        - name
+        - addressLine1
+        - city
+        - zip
+    SchoolsSearchSortBy:
+      type: string
+      enum:
+        - NAME
+        - CITY
+    CreateSchoolRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        zip:
+          type: string
+      required:
+        - name
+        - addressLine1
+        - city
+        - zip
+    CreateSchoolResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+        - message
+        - success
+    UpdateSchoolRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        zip:
+          type: string
+      required:
+        - name
+        - addressLine1
+        - city
+        - zip
+    UpdateSchoolResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+        - message
+        - success
+    DeleteSchoolResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+        - message
+        - success

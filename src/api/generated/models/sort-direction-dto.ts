@@ -14,7 +14,18 @@
 
 
 
-export * from './apis/auth-api';
-export * from './apis/me-api';
-export * from './apis/schools-api';
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const SortDirectionDto = {
+    Asc: 'ASC',
+    Desc: 'DESC'
+} as const;
+
+export type SortDirectionDto = typeof SortDirectionDto[keyof typeof SortDirectionDto];
+
+
 

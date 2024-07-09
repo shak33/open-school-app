@@ -1,0 +1,26 @@
+components:
+  parameters:
+    pageSize:
+      in: query
+      name: pageSize
+      required: true
+      schema:
+        type: integer
+    page:
+      in: query
+      name: page
+      required: true
+      schema:
+        type: integer
+    sortOrder:
+      in: query
+      name: sortOrder
+      required: false
+      schema:
+        $ref: '#/components/schemas/SortDirection'
+  schemas:
+    SortDirection:
+      type: string
+      enum:
+        - ASC
+        - DESC

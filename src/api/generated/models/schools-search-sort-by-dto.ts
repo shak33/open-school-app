@@ -14,7 +14,18 @@
 
 
 
-export * from './apis/auth-api';
-export * from './apis/me-api';
-export * from './apis/schools-api';
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const SchoolsSearchSortByDto = {
+    Name: 'NAME',
+    City: 'CITY'
+} as const;
+
+export type SchoolsSearchSortByDto = typeof SchoolsSearchSortByDto[keyof typeof SchoolsSearchSortByDto];
+
+
 
