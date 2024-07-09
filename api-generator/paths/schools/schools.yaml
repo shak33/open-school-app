@@ -36,6 +36,17 @@ update-school:
     responses:
       200:
         $ref: '#/components/responses/UpdateSchoolResponse'
+delete-school:
+  delete:
+    tags:
+      - Schools
+    summary: Delete school
+    operationId: DeleteSchool
+    parameters:
+      - $ref: '#/components/parameters/schoolId'
+    responses:
+      200:
+        $ref: '#/components/responses/DeleteSchoolResponse'
 components:
   requestBodies:
     CreateSchoolRequest:
@@ -83,6 +94,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/CreateSchoolResponse'
+    DeleteSchoolResponse:
+      description: Delete school response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeleteSchoolResponse'
   schemas:
     GetSchoolsResponse:
       type: object
@@ -169,6 +186,16 @@ components:
         - city
         - zip
     UpdateSchoolResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+        - message
+        - success
+    DeleteSchoolResponse:
       type: object
       properties:
         message:
