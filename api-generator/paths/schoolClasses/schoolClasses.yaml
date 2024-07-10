@@ -37,6 +37,18 @@ update-school-class:
     responses:
       200:
         $ref: '#/components/responses/UpdateSchoolClassResponse'
+delete-school-class:
+  delete:
+    tags:
+      - SchoolClass
+    summary: Delete school class
+    operationId: DeleteSchoolClass
+    parameters:
+      - $ref: '../commons.yaml#/components/parameters/schoolId'
+      - $ref: '../commons.yaml#/components/parameters/schoolClassId'
+    responses:
+      200:
+        $ref: '#/components/responses/DeleteSchoolClassResponse'
 components:
   requestBodies:
     CreateSchoolClassRequest:
@@ -70,6 +82,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UpdateSchoolClassResponse'
+    DeleteSchoolClassResponse:
+      description: Delete school class response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeleteSchoolClassResponse'
   schemas:
     CreateSchoolClassRequest:
       type: object
@@ -113,6 +131,16 @@ components:
         - message
         - success
     UpdateSchoolClassResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+        - message
+        - success
+    DeleteSchoolClassResponse:
       type: object
       properties:
         message:

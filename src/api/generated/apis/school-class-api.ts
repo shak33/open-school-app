@@ -26,6 +26,8 @@ import type { CreateSchoolClassRequestDto } from '../models';
 // @ts-ignore
 import type { CreateSchoolClassResponseDto } from '../models';
 // @ts-ignore
+import type { DeleteSchoolClassResponseDto } from '../models';
+// @ts-ignore
 import type { GetSchoolClassResponseDto } from '../models';
 // @ts-ignore
 import type { UpdateSchoolClassRequestDto } from '../models';
@@ -69,6 +71,47 @@ export const SchoolClassApiAxiosParamCreator = function (configuration?: Configu
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(createSchoolClassRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete school class
+         * @param {string} schoolId School id
+         * @param {string} schoolClassId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSchoolClass: async (schoolId: string, schoolClassId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'schoolId' is not null or undefined
+            assertParamExists('deleteSchoolClass', 'schoolId', schoolId)
+            // verify required parameter 'schoolClassId' is not null or undefined
+            assertParamExists('deleteSchoolClass', 'schoolClassId', schoolClassId)
+            const localVarPath = `/api/v1/schools/{schoolId}/classes/{schoolClassId}/delete`
+                .replace(`{${"schoolId"}}`, encodeURIComponent(String(schoolId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (schoolClassId !== undefined) {
+                localVarQueryParameter['schoolClassId'] = schoolClassId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -187,6 +230,20 @@ export const SchoolClassApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Delete school class
+         * @param {string} schoolId School id
+         * @param {string} schoolClassId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteSchoolClass(schoolId: string, schoolClassId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteSchoolClassResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSchoolClass(schoolId, schoolClassId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SchoolClassApi.deleteSchoolClass']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get school class
          * @param {string} schoolId School id
          * @param {string} schoolClassId 
@@ -237,6 +294,17 @@ export const SchoolClassApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
+         * @summary Delete school class
+         * @param {string} schoolId School id
+         * @param {string} schoolClassId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSchoolClass(schoolId: string, schoolClassId: string, options?: any): AxiosPromise<DeleteSchoolClassResponseDto> {
+            return localVarFp.deleteSchoolClass(schoolId, schoolClassId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get school class
          * @param {string} schoolId School id
          * @param {string} schoolClassId 
@@ -277,6 +345,17 @@ export interface SchoolClassApiInterface {
      * @memberof SchoolClassApiInterface
      */
     createSchoolClass(schoolId: string, createSchoolClassRequestDto?: CreateSchoolClassRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<CreateSchoolClassResponseDto>;
+
+    /**
+     * 
+     * @summary Delete school class
+     * @param {string} schoolId School id
+     * @param {string} schoolClassId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SchoolClassApiInterface
+     */
+    deleteSchoolClass(schoolId: string, schoolClassId: string, options?: RawAxiosRequestConfig): AxiosPromise<DeleteSchoolClassResponseDto>;
 
     /**
      * 
@@ -321,6 +400,19 @@ export class SchoolClassApi extends BaseAPI implements SchoolClassApiInterface {
      */
     public createSchoolClass(schoolId: string, createSchoolClassRequestDto?: CreateSchoolClassRequestDto, options?: RawAxiosRequestConfig) {
         return SchoolClassApiFp(this.configuration).createSchoolClass(schoolId, createSchoolClassRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete school class
+     * @param {string} schoolId School id
+     * @param {string} schoolClassId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SchoolClassApi
+     */
+    public deleteSchoolClass(schoolId: string, schoolClassId: string, options?: RawAxiosRequestConfig) {
+        return SchoolClassApiFp(this.configuration).deleteSchoolClass(schoolId, schoolClassId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
