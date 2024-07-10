@@ -18,6 +18,18 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/SortDirection'
+    schoolId:
+      in: query
+      name: schoolId
+      required: true
+      schema:
+        type: string
+    schoolClassId:
+      in: query
+      name: schoolClassId
+      required: true
+      schema:
+        type: string
   schemas:
     SortDirection:
       type: string

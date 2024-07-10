@@ -20,3 +20,5 @@ paths:
     $ref: "./paths/schools/schools.yaml#/update-school"
   /api/v1/schools/delete/{schoolId}:
     $ref: "./paths/schools/schools.yaml#/delete-school"
+  /api/v1/schools/{schoolId}/{schoolClassId}:
+    $ref: "./paths/schoolClasses/schoolClasses.yaml#/get-school-class"

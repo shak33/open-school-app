@@ -14,8 +14,23 @@
 
 
 
-export * from './apis/auth-api';
-export * from './apis/me-api';
-export * from './apis/school-class-api';
-export * from './apis/schools-api';
+/**
+ * 
+ * @export
+ * @interface SchoolClassDto
+ */
+export interface SchoolClassDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof SchoolClassDto
+     */
+    '_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SchoolClassDto
+     */
+    'name': string;
+}
 
