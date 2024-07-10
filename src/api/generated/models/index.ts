@@ -1,3 +1,5 @@
+export * from './create-school-class-request-dto';
+export * from './create-school-class-response-dto';
 export * from './create-school-request-dto';
 export * from './create-school-response-dto';
 export * from './delete-school-response-dto';

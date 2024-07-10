@@ -17,7 +17,7 @@ create-school-class:
     summary: Create school class
     operationId: CreateSchoolClass
     parameters:
-      - $ref: '#/components/parameters/schoolId'
+      - $ref: '../commons.yaml#/components/parameters/schoolId'
     requestBody:
       $ref: '#/components/requestBodies/CreateSchoolClassRequest'
     responses:
