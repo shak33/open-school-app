@@ -10,7 +10,27 @@ get-school-class:
     responses:
       200:
         $ref: '#/components/responses/GetSchoolClassResponse'
+create-school-class:
+  post:
+    tags:
+      - SchoolClass
+    summary: Create school class
+    operationId: CreateSchoolClass
+    parameters:
+      - $ref: '#/components/parameters/schoolId'
+    requestBody:
+      $ref: '#/components/requestBodies/CreateSchoolClassRequest'
+    responses:
+      200:
+        $ref: '#/components/responses/CreateSchoolClassResponse'
 components:
+  requestBodies:
+    CreateSchoolClassRequest:
+      description: Create school class request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateSchoolClassRequest'
   responses:
     GetSchoolClassResponse:
       description: Get school Class response
@@ -18,7 +38,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/GetSchoolClassResponse'
+    CreateSchoolClassResponse:
+      description: Create school class response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateSchoolClassResponse'
   schemas:
+    CreateSchoolClassRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - name
     GetSchoolClassResponse:
       type: object
       properties:
@@ -30,6 +65,16 @@ components:
           type: boolean
       required:
         - data
+        - message
+        - success
+    CreateSchoolClassResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
         - message
         - success
     SchoolClass:
