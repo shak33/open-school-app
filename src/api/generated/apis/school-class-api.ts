@@ -27,6 +27,10 @@ import type { CreateSchoolClassRequestDto } from '../models';
 import type { CreateSchoolClassResponseDto } from '../models';
 // @ts-ignore
 import type { GetSchoolClassResponseDto } from '../models';
+// @ts-ignore
+import type { UpdateSchoolClassRequestDto } from '../models';
+// @ts-ignore
+import type { UpdateSchoolClassResponseDto } from '../models';
 /**
  * SchoolClassApi - axios parameter creator
  * @export
@@ -44,7 +48,7 @@ export const SchoolClassApiAxiosParamCreator = function (configuration?: Configu
         createSchoolClass: async (schoolId: string, createSchoolClassRequestDto?: CreateSchoolClassRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'schoolId' is not null or undefined
             assertParamExists('createSchoolClass', 'schoolId', schoolId)
-            const localVarPath = `/api/v1/schools/{schoolId}/class/create`
+            const localVarPath = `/api/v1/schools/{schoolId}/classes/create`
                 .replace(`{${"schoolId"}}`, encodeURIComponent(String(schoolId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -84,7 +88,7 @@ export const SchoolClassApiAxiosParamCreator = function (configuration?: Configu
             assertParamExists('getSchoolClass', 'schoolId', schoolId)
             // verify required parameter 'schoolClassId' is not null or undefined
             assertParamExists('getSchoolClass', 'schoolClassId', schoolClassId)
-            const localVarPath = `/api/v1/schools/{schoolId}/{schoolClassId}`
+            const localVarPath = `/api/v1/schools/{schoolId}/classes/{schoolClassId}`
                 .replace(`{${"schoolId"}}`, encodeURIComponent(String(schoolId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -106,6 +110,51 @@ export const SchoolClassApiAxiosParamCreator = function (configuration?: Configu
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update school class
+         * @param {string} schoolId School id
+         * @param {string} schoolClassId 
+         * @param {UpdateSchoolClassRequestDto} [updateSchoolClassRequestDto] Update school class request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSchoolClass: async (schoolId: string, schoolClassId: string, updateSchoolClassRequestDto?: UpdateSchoolClassRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'schoolId' is not null or undefined
+            assertParamExists('updateSchoolClass', 'schoolId', schoolId)
+            // verify required parameter 'schoolClassId' is not null or undefined
+            assertParamExists('updateSchoolClass', 'schoolClassId', schoolClassId)
+            const localVarPath = `/api/v1/schools/{schoolId}/classes/{schoolClassId}/update`
+                .replace(`{${"schoolId"}}`, encodeURIComponent(String(schoolId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (schoolClassId !== undefined) {
+                localVarQueryParameter['schoolClassId'] = schoolClassId;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateSchoolClassRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -150,6 +199,21 @@ export const SchoolClassApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['SchoolClassApi.getSchoolClass']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary Update school class
+         * @param {string} schoolId School id
+         * @param {string} schoolClassId 
+         * @param {UpdateSchoolClassRequestDto} [updateSchoolClassRequestDto] Update school class request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateSchoolClass(schoolId: string, schoolClassId: string, updateSchoolClassRequestDto?: UpdateSchoolClassRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateSchoolClassResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSchoolClass(schoolId, schoolClassId, updateSchoolClassRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SchoolClassApi.updateSchoolClass']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -182,6 +246,18 @@ export const SchoolClassApiFactory = function (configuration?: Configuration, ba
         getSchoolClass(schoolId: string, schoolClassId: string, options?: any): AxiosPromise<GetSchoolClassResponseDto> {
             return localVarFp.getSchoolClass(schoolId, schoolClassId, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @summary Update school class
+         * @param {string} schoolId School id
+         * @param {string} schoolClassId 
+         * @param {UpdateSchoolClassRequestDto} [updateSchoolClassRequestDto] Update school class request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSchoolClass(schoolId: string, schoolClassId: string, updateSchoolClassRequestDto?: UpdateSchoolClassRequestDto, options?: any): AxiosPromise<UpdateSchoolClassResponseDto> {
+            return localVarFp.updateSchoolClass(schoolId, schoolClassId, updateSchoolClassRequestDto, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -212,6 +288,18 @@ export interface SchoolClassApiInterface {
      * @memberof SchoolClassApiInterface
      */
     getSchoolClass(schoolId: string, schoolClassId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetSchoolClassResponseDto>;
+
+    /**
+     * 
+     * @summary Update school class
+     * @param {string} schoolId School id
+     * @param {string} schoolClassId 
+     * @param {UpdateSchoolClassRequestDto} [updateSchoolClassRequestDto] Update school class request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SchoolClassApiInterface
+     */
+    updateSchoolClass(schoolId: string, schoolClassId: string, updateSchoolClassRequestDto?: UpdateSchoolClassRequestDto, options?: RawAxiosRequestConfig): AxiosPromise<UpdateSchoolClassResponseDto>;
 
 }
 
@@ -246,6 +334,20 @@ export class SchoolClassApi extends BaseAPI implements SchoolClassApiInterface {
      */
     public getSchoolClass(schoolId: string, schoolClassId: string, options?: RawAxiosRequestConfig) {
         return SchoolClassApiFp(this.configuration).getSchoolClass(schoolId, schoolClassId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update school class
+     * @param {string} schoolId School id
+     * @param {string} schoolClassId 
+     * @param {UpdateSchoolClassRequestDto} [updateSchoolClassRequestDto] Update school class request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SchoolClassApi
+     */
+    public updateSchoolClass(schoolId: string, schoolClassId: string, updateSchoolClassRequestDto?: UpdateSchoolClassRequestDto, options?: RawAxiosRequestConfig) {
+        return SchoolClassApiFp(this.configuration).updateSchoolClass(schoolId, schoolClassId, updateSchoolClassRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

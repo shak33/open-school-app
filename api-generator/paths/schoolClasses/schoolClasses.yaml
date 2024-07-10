@@ -23,6 +23,20 @@ create-school-class:
     responses:
       200:
         $ref: '#/components/responses/CreateSchoolClassResponse'
+update-school-class:
+  patch:
+    tags:
+      - SchoolClass
+    summary: Update school class
+    operationId: UpdateSchoolClass
+    parameters:
+      - $ref: '../commons.yaml#/components/parameters/schoolId'
+      - $ref: '../commons.yaml#/components/parameters/schoolClassId'
+    requestBody:
+      $ref: '#/components/requestBodies/UpdateSchoolClassRequest'
+    responses:
+      200:
+        $ref: '#/components/responses/UpdateSchoolClassResponse'
 components:
   requestBodies:
     CreateSchoolClassRequest:
@@ -31,6 +45,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/CreateSchoolClassRequest'
+    UpdateSchoolClassRequest:
+      description: Update school class request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateSchoolClassRequest'
   responses:
     GetSchoolClassResponse:
       description: Get school Class response
@@ -44,8 +64,23 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/CreateSchoolClassResponse'
+    UpdateSchoolClassResponse:
+      description: Update school class response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateSchoolClassResponse'
   schemas:
     CreateSchoolClassRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+    UpdateSchoolClassRequest:
       type: object
       properties:
         name:
@@ -68,6 +103,16 @@ components:
         - message
         - success
     CreateSchoolClassResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+        - message
+        - success
+    UpdateSchoolClassResponse:
       type: object
       properties:
         message:

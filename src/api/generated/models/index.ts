@@ -20,5 +20,7 @@ export * from './school-class-dto';
 export * from './school-dto';
 export * from './schools-search-sort-by-dto';
 export * from './sort-direction-dto';
+export * from './update-school-class-request-dto';
+export * from './update-school-class-response-dto';
 export * from './update-school-request-dto';
 export * from './update-school-response-dto';
