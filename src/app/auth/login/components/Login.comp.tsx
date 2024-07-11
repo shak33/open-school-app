@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input';
 import { useLogin } from '@/app/auth/login/utils/useLogin.util';
 import Cookies from 'js-cookie';
 import { useGetCurrentUserStore } from '@/models/CurrentUser.model';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export const Login = () => {
   const { login } = useLogin();
@@ -28,6 +28,7 @@ export const Login = () => {
     resolver: zodResolver(loginFormValidation),
   });
   const { currentUser, setCurrentUser } = useGetCurrentUserStore();
+  const router = useRouter();
 
   const handleSubmit: SubmitHandler<LoginFormModel> = async (form) => {
     const data = await login(form);
@@ -37,7 +38,7 @@ export const Login = () => {
   };
 
   if (currentUser) {
-    redirect('/');
+    router.push('/');
   }
 
   return (

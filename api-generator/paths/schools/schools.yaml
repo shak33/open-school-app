@@ -182,11 +182,14 @@ components:
           type: string
         zip:
           type: string
+        active:
+          type: boolean
       required:
         - name
         - addressLine1
         - city
         - zip
+        - active
     CreateSchoolResponse:
       type: object
       properties:
