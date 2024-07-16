@@ -13,8 +13,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 142.1 70.6 45.3%;
+    --primary-foreground: 142.2 70.4 60.2%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -33,6 +33,8 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    --primary-text: 222.2 47.4% 11.2%;
   }
 
   .dark {
@@ -66,6 +68,10 @@
   }
 }
 
+.text-primary {
+  color: var(--primary-text);
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -74,7 +80,6 @@
     @apply bg-background text-foreground;
   }
 }
-
 
 .loading-indicator,
 .loading-indicator div,

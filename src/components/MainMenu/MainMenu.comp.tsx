@@ -27,7 +27,7 @@ export const MainMenu = () => {
     currentUser?.role === UserRoleDto.Admin;
 
   const isActiveRoute = (route: string) => {
-    return pathname === route ? 'bg-green-500 text-white' : '';
+    return pathname === route;
   };
 
   const menuStructure = {
@@ -83,13 +83,10 @@ export const MainMenu = () => {
             return (
               <li key={key} className={value.liClassees}>
                 <Button
-                  variant="link"
-                  className={`text-base hover:underline w-[90%] ml-[5%] mr-[5%] justify-start ${value.isActive}`}
+                  variant={value.isActive ? 'default' : 'link'}
+                  className="w-[90%] ml-[5%] mr-[5%] justify-start"
                 >
-                  <Link
-                    href={value.route}
-                    className="flex items-center hover:underline"
-                  >
+                  <Link href={value.route} className="flex items-center">
                     {value.icon} {key}
                   </Link>
                 </Button>
