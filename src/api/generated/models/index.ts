@@ -20,3 +20,4 @@ export * from './schools-search-sort-by-dto';
 export * from './sort-direction-dto';
 export * from './update-school-request-dto';
 export * from './update-school-response-dto';
+export * from './user-role-dto';

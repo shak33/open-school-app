@@ -36,3 +36,10 @@ components:
       enum:
         - ASC
         - DESC
+    UserRole:
+      type: enum
+      enum:
+        - SUPER_ADMIN
+        - ADMIN
+        - TEACHER
+        - STUDENT

@@ -26,16 +26,18 @@ components:
               type: string
             email:
               type: string
-              required:
-                - token
             firstName:
               type: string
             lastName:
               type: string
-            roles: 
-              type: array
-              items:
-                type: string
+            role:
+              $ref: '../commons.yaml#/components/schemas/UserRole'
+          required:
+            - _id
+            - email
+            - firstName
+            - lastName
+            - role
         message:
           type: string
         success:
