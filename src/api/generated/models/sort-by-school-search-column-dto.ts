@@ -20,12 +20,13 @@
  * @enum {string}
  */
 
-export const SchoolsSearchSortByDto = {
+export const SortBySchoolSearchColumnDto = {
     Name: 'NAME',
+    Country: 'COUNTRY',
     City: 'CITY'
 } as const;
 
-export type SchoolsSearchSortByDto = typeof SchoolsSearchSortByDto[keyof typeof SchoolsSearchSortByDto];
+export type SortBySchoolSearchColumnDto = typeof SortBySchoolSearchColumnDto[keyof typeof SortBySchoolSearchColumnDto];
 
 
 

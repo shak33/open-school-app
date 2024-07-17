@@ -15,30 +15,30 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { SchoolDto } from './school-dto';
+import type { SchoolsSearchResultDataDto } from './schools-search-result-data-dto';
 
 /**
  * 
  * @export
- * @interface GetSchoolsResponseDto
+ * @interface SchoolsSearchResultDto
  */
-export interface GetSchoolsResponseDto {
+export interface SchoolsSearchResultDto {
     /**
      * 
-     * @type {Array<SchoolDto>}
-     * @memberof GetSchoolsResponseDto
+     * @type {SchoolsSearchResultDataDto}
+     * @memberof SchoolsSearchResultDto
      */
-    'data': Array<SchoolDto>;
+    'data': SchoolsSearchResultDataDto;
     /**
      * 
      * @type {string}
-     * @memberof GetSchoolsResponseDto
+     * @memberof SchoolsSearchResultDto
      */
     'message': string;
     /**
      * 
      * @type {boolean}
-     * @memberof GetSchoolsResponseDto
+     * @memberof SchoolsSearchResultDto
      */
     'success': boolean;
 }

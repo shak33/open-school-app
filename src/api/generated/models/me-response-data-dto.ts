@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UserRoleDto } from './user-role-dto';
 
 /**
  * 
@@ -25,30 +28,32 @@ export interface MeResponseDataDto {
      * @type {string}
      * @memberof MeResponseDataDto
      */
-    '_id'?: string;
+    '_id': string;
     /**
      * 
      * @type {string}
      * @memberof MeResponseDataDto
      */
-    'email'?: string;
+    'email': string;
     /**
      * 
      * @type {string}
      * @memberof MeResponseDataDto
      */
-    'firstName'?: string;
+    'firstName': string;
     /**
      * 
      * @type {string}
      * @memberof MeResponseDataDto
      */
-    'lastName'?: string;
+    'lastName': string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {UserRoleDto}
      * @memberof MeResponseDataDto
      */
-    'roles'?: Array<string>;
+    'role': UserRoleDto;
 }
+
+
 

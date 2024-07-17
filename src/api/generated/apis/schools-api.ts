@@ -30,12 +30,6 @@ import type { DeleteSchoolResponseDto } from '../models';
 // @ts-ignore
 import type { GetSchoolResponseDto } from '../models';
 // @ts-ignore
-import type { GetSchoolsResponseDto } from '../models';
-// @ts-ignore
-import type { SchoolsSearchSortByDto } from '../models';
-// @ts-ignore
-import type { SortDirectionDto } from '../models';
-// @ts-ignore
 import type { UpdateSchoolRequestDto } from '../models';
 // @ts-ignore
 import type { UpdateSchoolResponseDto } from '../models';
@@ -149,60 +143,6 @@ export const SchoolsApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Get schools
-         * @param {number} pageSize 
-         * @param {number} page 
-         * @param {SortDirectionDto} [sortOrder] 
-         * @param {SchoolsSearchSortByDto} [sortBy] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getSchools: async (pageSize: number, page: number, sortOrder?: SortDirectionDto, sortBy?: SchoolsSearchSortByDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'pageSize' is not null or undefined
-            assertParamExists('getSchools', 'pageSize', pageSize)
-            // verify required parameter 'page' is not null or undefined
-            assertParamExists('getSchools', 'page', page)
-            const localVarPath = `/api/v1/schools/list`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (pageSize !== undefined) {
-                localVarQueryParameter['pageSize'] = pageSize;
-            }
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (sortOrder !== undefined) {
-                localVarQueryParameter['sortOrder'] = sortOrder;
-            }
-
-            if (sortBy !== undefined) {
-                localVarQueryParameter['sortBy'] = sortBy;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Update school
          * @param {string} schoolId School id
          * @param {UpdateSchoolRequestDto} [updateSchoolRequestDto] Update school request
@@ -290,22 +230,6 @@ export const SchoolsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get schools
-         * @param {number} pageSize 
-         * @param {number} page 
-         * @param {SortDirectionDto} [sortOrder] 
-         * @param {SchoolsSearchSortByDto} [sortBy] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getSchools(pageSize: number, page: number, sortOrder?: SortDirectionDto, sortBy?: SchoolsSearchSortByDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetSchoolsResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSchools(pageSize, page, sortOrder, sortBy, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SchoolsApi.getSchools']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @summary Update school
          * @param {string} schoolId School id
          * @param {UpdateSchoolRequestDto} [updateSchoolRequestDto] Update school request
@@ -360,19 +284,6 @@ export const SchoolsApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary Get schools
-         * @param {number} pageSize 
-         * @param {number} page 
-         * @param {SortDirectionDto} [sortOrder] 
-         * @param {SchoolsSearchSortByDto} [sortBy] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getSchools(pageSize: number, page: number, sortOrder?: SortDirectionDto, sortBy?: SchoolsSearchSortByDto, options?: any): AxiosPromise<GetSchoolsResponseDto> {
-            return localVarFp.getSchools(pageSize, page, sortOrder, sortBy, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Update school
          * @param {string} schoolId School id
          * @param {UpdateSchoolRequestDto} [updateSchoolRequestDto] Update school request
@@ -420,19 +331,6 @@ export interface SchoolsApiInterface {
      * @memberof SchoolsApiInterface
      */
     getSchool(schoolId: string, options?: RawAxiosRequestConfig): AxiosPromise<GetSchoolResponseDto>;
-
-    /**
-     * 
-     * @summary Get schools
-     * @param {number} pageSize 
-     * @param {number} page 
-     * @param {SortDirectionDto} [sortOrder] 
-     * @param {SchoolsSearchSortByDto} [sortBy] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SchoolsApiInterface
-     */
-    getSchools(pageSize: number, page: number, sortOrder?: SortDirectionDto, sortBy?: SchoolsSearchSortByDto, options?: RawAxiosRequestConfig): AxiosPromise<GetSchoolsResponseDto>;
 
     /**
      * 
@@ -488,21 +386,6 @@ export class SchoolsApi extends BaseAPI implements SchoolsApiInterface {
      */
     public getSchool(schoolId: string, options?: RawAxiosRequestConfig) {
         return SchoolsApiFp(this.configuration).getSchool(schoolId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get schools
-     * @param {number} pageSize 
-     * @param {number} page 
-     * @param {SortDirectionDto} [sortOrder] 
-     * @param {SchoolsSearchSortByDto} [sortBy] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SchoolsApi
-     */
-    public getSchools(pageSize: number, page: number, sortOrder?: SortDirectionDto, sortBy?: SchoolsSearchSortByDto, options?: RawAxiosRequestConfig) {
-        return SchoolsApiFp(this.configuration).getSchools(pageSize, page, sortOrder, sortBy, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

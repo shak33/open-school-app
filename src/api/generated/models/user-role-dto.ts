@@ -14,9 +14,20 @@
 
 
 
-export * from './apis/auth-api';
-export * from './apis/me-api';
-export * from './apis/school-class-api';
-export * from './apis/schools-api';
-export * from './apis/schools-search-api';
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const UserRoleDto = {
+    SuperAdmin: 'SUPER_ADMIN',
+    Admin: 'ADMIN',
+    Teacher: 'TEACHER',
+    Student: 'STUDENT'
+} as const;
+
+export type UserRoleDto = typeof UserRoleDto[keyof typeof UserRoleDto];
+
+
 

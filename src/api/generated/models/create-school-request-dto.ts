@@ -50,5 +50,11 @@ export interface CreateSchoolRequestDto {
      * @memberof CreateSchoolRequestDto
      */
     'zip': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateSchoolRequestDto
+     */
+    'active': boolean;
 }
 

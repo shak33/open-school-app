@@ -15,21 +15,23 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center p-4 bg-white text-black shadow-md mb-[50px]">
+    <div className="flex justify-between items-center p-4 bg-white text-black shadow-md">
       <div className="flex items-center space-x-4">
         <div className="text-2xl font-bold">Open School</div>
-        <div className="flex items-center space-x-4">
-          <Button variant="link" className="text-base hover:underline">
-            <Link href="/" className="hover:underline">
-              Home
-            </Link>
-          </Button>
-          <Button variant="link" className="text-base hover:underline">
-            <Link href="#" className="hover:underline">
-              About
-            </Link>
-          </Button>
-        </div>
+        {!currentUser ? (
+          <div className="flex items-center space-x-4">
+            <Button variant="link" className="text-base hover:underline">
+              <Link href="/" className="hover:underline">
+                Home
+              </Link>
+            </Button>
+            <Button variant="link" className="text-base hover:underline">
+              <Link href="#" className="hover:underline">
+                About
+              </Link>
+            </Button>
+          </div>
+        ) : null}
       </div>
       {currentUser ? (
         <div className="flex items-center space-x-4">

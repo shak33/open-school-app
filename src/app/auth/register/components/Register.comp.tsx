@@ -19,9 +19,10 @@ import { Input } from '@/components/ui/input';
 import { useRegister } from '@/app/auth/register/utils/useRegister.util';
 import Cookies from 'js-cookie';
 import { useGetCurrentUserStore } from '@/models/CurrentUser.model';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export const Register = () => {
+  const router = useRouter();
   const { register } = useRegister();
   const formMethods = useForm<RegisterFormModel>({
     defaultValues: initialRegisterFormValues,
@@ -37,7 +38,7 @@ export const Register = () => {
   };
 
   if (currentUser) {
-    redirect('/');
+    router.push('/');
   }
 
   return (

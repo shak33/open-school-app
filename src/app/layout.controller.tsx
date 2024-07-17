@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useGetCurrentUser } from '@/utils/useGetCurrentUser.util';
 import { useGetCurrentUserStore } from '@/models/CurrentUser.model';
-import { Navbar } from '@/components/Navbar/Navbar.comp';
+import { Loader } from '@/components/Loader/Loader.comp';
 
 interface Props {
   children: React.ReactNode;
@@ -20,13 +20,12 @@ export const LayoutController = ({ children }: Props) => {
   }, [currentUser]);
 
   if (isCurrentUserLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="fixed inset-0 flex justify-center items-center z-50">
+        <Loader />
+      </div>
+    );
   }
 
-  return (
-    <>
-      <Navbar />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 };
