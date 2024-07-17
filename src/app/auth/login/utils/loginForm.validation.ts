@@ -6,6 +6,9 @@ export const loginFormValidation = z.object({
     .min(3, {
       message: 'Email must be at least 3 characters long',
     })
+    .email({
+      message: 'Email field must be a valid email',
+    })
     .max(255, {
       message: 'Email must be at most 255 characters long',
     }),
