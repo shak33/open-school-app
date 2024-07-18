@@ -1,9 +1,8 @@
-'use client';
-
 import { ViewWrapper } from '@/components/ViewWrapper/ViewWrapper.comp';
 import { Button } from '@/components/ui/button';
 import { CiCirclePlus } from 'react-icons/ci';
 import Link from 'next/link';
+import { SchoolsTable } from '@/app/schools/components/SchoolsTable/SchoolsTable.comp';
 
 export default function SchoolsListPage() {
   return (
@@ -16,7 +15,7 @@ export default function SchoolsListPage() {
           </Button>
         </Link>
       </div>
-      {'schools list'}
+      <SchoolsTable />
     </ViewWrapper>
   );
 }
