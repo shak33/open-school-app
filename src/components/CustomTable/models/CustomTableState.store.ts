@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { create } from 'zustand';
 import {
   CustomTableStateModel,
@@ -14,8 +15,8 @@ type CustomTableStore<
   SEARCH_FORM_MODEL,
   ROW_ITEM_MODEL
 > & {
-  setPageSize: (pageSize: number) => void;
-  setPage: (page: number) => void;
+  setPageSize: (pageSize: string) => void;
+  setPage: (page: string) => void;
   setSortBy: (sortBy: SORT_BY_COLUMN_NAME_MODEL) => void;
   setSortOrder: (sortOrder: SortDirectionDto) => void;
   setParams: (params: SEARCH_FORM_MODEL) => void;
@@ -27,32 +28,34 @@ export const useCustomTableStore = <
   SEARCH_FORM_MODEL extends object,
   ROW_ITEM_MODEL extends object
 >() =>
-  create<
-    CustomTableStore<
-      SORT_BY_COLUMN_NAME_MODEL,
-      SEARCH_FORM_MODEL,
-      ROW_ITEM_MODEL
-    >
-  >((set) => ({
-    pageSize: 10,
-    page: 1,
-    sortBy: '' as SORT_BY_COLUMN_NAME_MODEL,
-    sortOrder: SortDirectionDto.Asc,
-    params: {} as SEARCH_FORM_MODEL,
-    data: {
-      message: '',
-      success: false,
+  useMemo(() => {
+    return create<
+      CustomTableStore<
+        SORT_BY_COLUMN_NAME_MODEL,
+        SEARCH_FORM_MODEL,
+        ROW_ITEM_MODEL
+      >
+    >((set) => ({
+      pageSize: '10',
+      page: '1',
+      sortBy: '' as SORT_BY_COLUMN_NAME_MODEL,
+      sortOrder: SortDirectionDto.Asc,
+      params: {} as SEARCH_FORM_MODEL,
       data: {
-        totalPages: 0,
-        totalResults: 0,
-        items: [],
+        message: '',
+        success: false,
+        data: {
+          totalPages: 0,
+          totalResults: 0,
+          items: [],
+        },
       },
-    },
 
-    setPageSize: (pageSize) => set((state) => ({ ...state, pageSize })),
-    setPage: (page) => set((state) => ({ ...state, page })),
-    setSortBy: (sortBy) => set((state) => ({ ...state, sortBy })),
-    setSortOrder: (sortOrder) => set((state) => ({ ...state, sortOrder })),
-    setParams: (params) => set((state) => ({ ...state, params })),
-    setData: (data) => set((state) => ({ ...state, data })),
-  }));
+      setPageSize: (pageSize) => set((state) => ({ ...state, pageSize })),
+      setPage: (page) => set((state) => ({ ...state, page })),
+      setSortBy: (sortBy) => set((state) => ({ ...state, sortBy })),
+      setSortOrder: (sortOrder) => set((state) => ({ ...state, sortOrder })),
+      setParams: (params) => set((state) => ({ ...state, params })),
+      setData: (data) => set((state) => ({ ...state, data })),
+    }));
+  }, []);

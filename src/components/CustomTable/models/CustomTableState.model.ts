@@ -15,8 +15,8 @@ export type CustomTableStateModel<
   SEARCH_FORM_MODEL extends object,
   ROW_ITEM_MODEL extends object
 > = {
-  pageSize: number;
-  page: number;
+  pageSize: string;
+  page: string;
   sortBy: SORT_BY_COLUMN_NAME_MODEL;
   sortOrder: SortDirectionDto;
   params: SEARCH_FORM_MODEL;
