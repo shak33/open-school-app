@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useCallback } from 'react';
 import {
   Table,
@@ -13,6 +15,7 @@ import { Loader } from '@/components/Loader/Loader.comp';
 import { FaSort } from 'react-icons/fa';
 import { FaSortUp, FaSortDown } from 'react-icons/fa6';
 import { CustomTableFooter } from '@/components/CustomTable/components/CustomTableFooter.comp';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
 type CustomTableRowComponent<ROW_ITEM_MODEL extends object> = React.FC<{
   row: ROW_ITEM_MODEL;
@@ -60,11 +63,6 @@ export const CustomTable = <
   isLoading,
   idKey,
 }: Props<SORT_BY_COLUMN_NAME_MODEL, SEARCH_FORM_MODEL, ROW_ITEM_MODEL>) => {
-  const useStore = useCustomTableStore<
-    SORT_BY_COLUMN_NAME_MODEL,
-    SEARCH_FORM_MODEL,
-    ROW_ITEM_MODEL
-  >();
   const {
     pageSize,
     page,
@@ -78,7 +76,29 @@ export const CustomTable = <
     setSortOrder,
     setParams,
     setData,
-  } = useStore();
+  } = useCustomTableStore();
+  // const useStore = useCustomTableStore<
+  //   SORT_BY_COLUMN_NAME_MODEL,
+  //   SEARCH_FORM_MODEL,
+  //   ROW_ITEM_MODEL
+  // >();
+  // const {
+  //   pageSize,
+  //   page,
+  //   sortBy,
+  //   sortOrder,
+  //   params,
+  //   data,
+  //   setPageSize,
+  //   setPage,
+  //   setSortBy,
+  //   setSortOrder,
+  //   setParams,
+  //   setData,
+  // } = useStore();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
   const resolveOrder = (sortOrder: SortDirectionDto) => {
     if (sortOrder === SortDirectionDto.Asc) {
@@ -118,23 +138,27 @@ export const CustomTable = <
       setSortBy(sortBy);
       setSortOrder(resolvedSortOrder);
     },
-    [page, pageSize, sortBy, sortOrder, params, getTableDataRequest]
+    [data, page, pageSize, sortBy, sortOrder, params, getTableDataRequest]
   );
 
   const handleChangeRowsPerPage = useCallback(
-    (pageSize: string) => async () => {
-      const tableData = await getTableDataRequest({
-        page,
-        pageSize,
-        sortBy,
-        sortOrder,
-        params,
-      });
+    (pageSize: string) => {
+      const fetchData = async () => {
+        const tableData = await getTableDataRequest({
+          page,
+          pageSize,
+          sortBy,
+          sortOrder,
+          params,
+        });
 
-      setData(tableData);
-      setPageSize(pageSize);
+        setData(tableData);
+        setPageSize(pageSize);
+      };
+
+      fetchData();
     },
-    [page, sortBy, sortOrder, params, getTableDataRequest]
+    [data, page, sortBy, sortOrder, params, pageSize, getTableDataRequest]
   );
 
   useEffect(() => {
@@ -153,6 +177,18 @@ export const CustomTable = <
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+
+    params.set('page', page);
+    params.set('pageSize', pageSize);
+    params.set('sortBy', sortBy);
+    params.set('sortOrder', sortOrder);
+    params.set('params', JSON.stringify(params));
+
+    replace(`${pathname}?${params.toString()}`);
+  }, []);
+
   if (isLoading) {
     return (
       <div className="w-full h-full flex justify-center items-center">
@@ -165,11 +201,11 @@ export const CustomTable = <
     <>
       <Table className="mt-5">
         <TableHeader>
-          <TableRow>
+          <TableRow className="hover:bg-transparent">
             {tableHead.map(({ label, id, sortBy }) =>
               sortBy ? (
                 <TableHead
-                  className="w-[100px]"
+                  className="w-[100px] cursor-pointer"
                   key={id}
                   onClick={handleRequestSort(sortBy)}
                 >
@@ -198,8 +234,8 @@ export const CustomTable = <
         ROW_ITEM_MODEL
       >
         handleChangeRowsPerPage={handleChangeRowsPerPage}
-        totalPages={data?.data?.totalPages}
-        totalResults={data?.data?.totalResults}
+        totalPages={data?.data?.totalPages.toString()}
+        totalResults={data?.data?.totalResults.toString()}
       />
     </>
   );
