@@ -38,15 +38,15 @@ export const SchoolsSearchApiAxiosParamCreator = function (configuration?: Confi
         /**
          * 
          * @summary Get schools search
-         * @param {number} pageSize 
-         * @param {number} page 
+         * @param {string} pageSize 
+         * @param {string} page 
          * @param {FindSchoolsSearchRequestDto} findSchoolsSearchRequestDto Find schools request
          * @param {SortDirectionDto} [sortOrder] 
          * @param {SortBySchoolSearchColumnDto} [sortBy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSchoolsSearch: async (pageSize: number, page: number, findSchoolsSearchRequestDto: FindSchoolsSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolSearchColumnDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSchoolsSearch: async (pageSize: string, page: string, findSchoolsSearchRequestDto: FindSchoolsSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolSearchColumnDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'pageSize' is not null or undefined
             assertParamExists('getSchoolsSearch', 'pageSize', pageSize)
             // verify required parameter 'page' is not null or undefined
@@ -108,15 +108,15 @@ export const SchoolsSearchApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get schools search
-         * @param {number} pageSize 
-         * @param {number} page 
+         * @param {string} pageSize 
+         * @param {string} page 
          * @param {FindSchoolsSearchRequestDto} findSchoolsSearchRequestDto Find schools request
          * @param {SortDirectionDto} [sortOrder] 
          * @param {SortBySchoolSearchColumnDto} [sortBy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSchoolsSearch(pageSize: number, page: number, findSchoolsSearchRequestDto: FindSchoolsSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolSearchColumnDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SchoolsSearchResultDto>> {
+        async getSchoolsSearch(pageSize: string, page: string, findSchoolsSearchRequestDto: FindSchoolsSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolSearchColumnDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SchoolsSearchResultDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSchoolsSearch(pageSize, page, findSchoolsSearchRequestDto, sortOrder, sortBy, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SchoolsSearchApi.getSchoolsSearch']?.[localVarOperationServerIndex]?.url;
@@ -135,15 +135,15 @@ export const SchoolsSearchApiFactory = function (configuration?: Configuration, 
         /**
          * 
          * @summary Get schools search
-         * @param {number} pageSize 
-         * @param {number} page 
+         * @param {string} pageSize 
+         * @param {string} page 
          * @param {FindSchoolsSearchRequestDto} findSchoolsSearchRequestDto Find schools request
          * @param {SortDirectionDto} [sortOrder] 
          * @param {SortBySchoolSearchColumnDto} [sortBy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSchoolsSearch(pageSize: number, page: number, findSchoolsSearchRequestDto: FindSchoolsSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolSearchColumnDto, options?: any): AxiosPromise<SchoolsSearchResultDto> {
+        getSchoolsSearch(pageSize: string, page: string, findSchoolsSearchRequestDto: FindSchoolsSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolSearchColumnDto, options?: any): AxiosPromise<SchoolsSearchResultDto> {
             return localVarFp.getSchoolsSearch(pageSize, page, findSchoolsSearchRequestDto, sortOrder, sortBy, options).then((request) => request(axios, basePath));
         },
     };
@@ -158,8 +158,8 @@ export interface SchoolsSearchApiInterface {
     /**
      * 
      * @summary Get schools search
-     * @param {number} pageSize 
-     * @param {number} page 
+     * @param {string} pageSize 
+     * @param {string} page 
      * @param {FindSchoolsSearchRequestDto} findSchoolsSearchRequestDto Find schools request
      * @param {SortDirectionDto} [sortOrder] 
      * @param {SortBySchoolSearchColumnDto} [sortBy] 
@@ -167,7 +167,7 @@ export interface SchoolsSearchApiInterface {
      * @throws {RequiredError}
      * @memberof SchoolsSearchApiInterface
      */
-    getSchoolsSearch(pageSize: number, page: number, findSchoolsSearchRequestDto: FindSchoolsSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolSearchColumnDto, options?: RawAxiosRequestConfig): AxiosPromise<SchoolsSearchResultDto>;
+    getSchoolsSearch(pageSize: string, page: string, findSchoolsSearchRequestDto: FindSchoolsSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolSearchColumnDto, options?: RawAxiosRequestConfig): AxiosPromise<SchoolsSearchResultDto>;
 
 }
 
@@ -181,8 +181,8 @@ export class SchoolsSearchApi extends BaseAPI implements SchoolsSearchApiInterfa
     /**
      * 
      * @summary Get schools search
-     * @param {number} pageSize 
-     * @param {number} page 
+     * @param {string} pageSize 
+     * @param {string} page 
      * @param {FindSchoolsSearchRequestDto} findSchoolsSearchRequestDto Find schools request
      * @param {SortDirectionDto} [sortOrder] 
      * @param {SortBySchoolSearchColumnDto} [sortBy] 
@@ -190,7 +190,7 @@ export class SchoolsSearchApi extends BaseAPI implements SchoolsSearchApiInterfa
      * @throws {RequiredError}
      * @memberof SchoolsSearchApi
      */
-    public getSchoolsSearch(pageSize: number, page: number, findSchoolsSearchRequestDto: FindSchoolsSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolSearchColumnDto, options?: RawAxiosRequestConfig) {
+    public getSchoolsSearch(pageSize: string, page: string, findSchoolsSearchRequestDto: FindSchoolsSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolSearchColumnDto, options?: RawAxiosRequestConfig) {
         return SchoolsSearchApiFp(this.configuration).getSchoolsSearch(pageSize, page, findSchoolsSearchRequestDto, sortOrder, sortBy, options).then((request) => request(this.axios, this.basePath));
     }
 }

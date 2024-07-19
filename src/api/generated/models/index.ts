@@ -1,8 +1,5 @@
-export * from './create-school-class-request-dto';
-export * from './create-school-class-response-dto';
 export * from './create-school-request-dto';
 export * from './create-school-response-dto';
-export * from './delete-school-class-response-dto';
 export * from './delete-school-response-dto';
 export * from './find-schools-search-request-dto';
 export * from './get-school-class-response-dto';
@@ -24,8 +21,6 @@ export * from './schools-search-result-data-dto';
 export * from './schools-search-result-dto';
 export * from './sort-by-school-search-column-dto';
 export * from './sort-direction-dto';
-export * from './update-school-class-request-dto';
-export * from './update-school-class-response-dto';
 export * from './update-school-request-dto';
 export * from './update-school-response-dto';
 export * from './user-role-dto';
