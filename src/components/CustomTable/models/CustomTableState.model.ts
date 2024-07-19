@@ -1,13 +1,9 @@
 import { SortDirectionDto } from '@/api/generated';
 
 export type CustomTableStateDataModel<ROW_ITEM_MODEL extends object> = {
-  message: string;
-  success: boolean;
-  data: {
-    totalPages: number;
-    totalResults: number;
-    items: ROW_ITEM_MODEL[];
-  };
+  totalPages: number;
+  totalResults: number;
+  items: ROW_ITEM_MODEL[];
 };
 
 export type CustomTableStateModel<

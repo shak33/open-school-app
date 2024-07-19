@@ -1,14 +1,14 @@
 import { useGetSchoolsList } from '@/app/schools/utils/useSearchSchools.util';
 import {
-  SchoolsSearchResultDto,
+  SchoolsSearchResultDataDto,
   SortBySchoolSearchColumnDto,
   SortDirectionDto,
 } from '@/api/generated';
 import { SchoolsSearchFormModel } from '@/app/schools/models/SchoolsSearchForm.model';
 
 export interface HandleGetSchoolsListRequestProps {
-  pageSize?: number;
-  page?: number;
+  pageSize?: string;
+  page?: string;
   sortBy?: SortBySchoolSearchColumnDto;
   sortOrder?: SortDirectionDto;
   params?: SchoolsSearchFormModel;
@@ -18,7 +18,7 @@ type Return = {
   isLoading: boolean;
   handleGetSchoolsListRequest: (
     props: HandleGetSchoolsListRequestProps
-  ) => Promise<SchoolsSearchResultDto>;
+  ) => Promise<SchoolsSearchResultDataDto>;
 };
 
 export const useHandleGetSchoolsListRequest = (): Return => {
@@ -30,8 +30,8 @@ export const useHandleGetSchoolsListRequest = (): Return => {
       props: HandleGetSchoolsListRequestProps
     ) => {
       return await getSchoolsList({
-        page: props.page ?? 1,
-        pageSize: props.pageSize ?? 10,
+        page: props.page ?? '1',
+        pageSize: props.pageSize ?? '10',
         params: {
           name: props.params?.name ?? '',
           country: props.params?.country ?? '',

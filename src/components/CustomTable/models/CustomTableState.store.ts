@@ -71,13 +71,9 @@ export const useCustomTableStore = create<
   sortOrder: SortDirectionDto.Asc,
   params: {},
   data: {
-    message: '',
-    success: false,
-    data: {
-      totalPages: 0,
-      totalResults: 0,
-      items: [],
-    },
+    totalPages: 0,
+    totalResults: 0,
+    items: [],
   },
 
   setPageSize: (pageSize) => set((state) => ({ ...state, pageSize })),

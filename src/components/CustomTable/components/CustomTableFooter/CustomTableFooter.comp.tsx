@@ -29,13 +29,31 @@ export const CustomTableFooter = <
   totalPages,
   totalResults,
 }: Props) => {
-  const { pageSize, page } = useCustomTableStore();
+  const { pageSize, page, setPage } = useCustomTableStore();
   // const useStore = useCustomTableStore<
   //   SORT_BY_COLUMN_NAME_MODEL,
   //   SEARCH_FORM_MODEL,
   //   ROW_ITEM_MODEL
   // >();
   // const { pageSize, page } = useStore();
+
+  const goToFirstPage = () => {
+    setPage('1');
+  };
+
+  const goToPreviousPage = () => {
+    const newPage = parseInt(page) - 1;
+    setPage(newPage.toString());
+  };
+
+  const goToNextPage = () => {
+    const newPage = parseInt(page) + 1;
+    setPage(newPage.toString());
+  };
+
+  const goToLastPage = () => {
+    setPage(totalPages);
+  };
 
   return (
     <div className="flex justify-between mt-10">
@@ -57,20 +75,36 @@ export const CustomTableFooter = <
             </SelectContent>
           </Select>
         </div>
-        <div className="inline-flex items-center mr-10">
-          {page} {'of'} {totalPages}
-        </div>
         <div className="inline-flex items-center">
-          <Button variant="link" disabled={page === '1'}>
+          <Button
+            variant="link"
+            disabled={page === '1'}
+            onClick={goToFirstPage}
+          >
             <MdOutlineKeyboardDoubleArrowLeft size="18" />
           </Button>
-          <Button variant="link" disabled={page === '1'}>
+          <Button
+            variant="link"
+            disabled={page === '1'}
+            onClick={goToPreviousPage}
+          >
             <MdOutlineKeyboardArrowLeft size="18" />
           </Button>
-          <Button variant="link" disabled={page === totalPages}>
+          <div className="inline-flex items-center mx-3">
+            {page} {'of'} {totalPages}
+          </div>
+          <Button
+            variant="link"
+            disabled={page === totalPages}
+            onClick={goToNextPage}
+          >
             <MdOutlineKeyboardArrowRight size="18" />
           </Button>
-          <Button variant="link" disabled={page === totalPages}>
+          <Button
+            variant="link"
+            disabled={page === totalPages}
+            onClick={goToLastPage}
+          >
             <MdOutlineKeyboardDoubleArrowRight size="18" />
           </Button>
         </div>

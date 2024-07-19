@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import {
-  SchoolsSearchResultDto,
+  SchoolsSearchResultDataDto,
   FindSchoolsSearchRequestDto,
   SortBySchoolSearchColumnDto,
   SortDirectionDto,
@@ -9,15 +9,15 @@ import {
 import { useSchoolsListApiClient } from '@/api/utils/useSchoolsListApiClient.util';
 
 type Req = {
-  pageSize: number;
-  page: number;
+  pageSize: string;
+  page: string;
   sortOrder?: SortDirectionDto;
   params: FindSchoolsSearchRequestDto;
   sortBy?: SortBySchoolSearchColumnDto;
 };
 
 type Return = {
-  getSchoolsList: (req: Req) => Promise<SchoolsSearchResultDto>;
+  getSchoolsList: (req: Req) => Promise<SchoolsSearchResultDataDto>;
   isGettingSchoolsList: boolean;
   isErrorGettingSchoolsList: boolean;
 };
@@ -26,21 +26,21 @@ export const useGetSchoolsList = (): Return => {
   const { schoolsSearchApi } = useSchoolsListApiClient();
 
   const { isError, mutateAsync, isPending } = useMutation<
-    SchoolsSearchResultDto,
+    SchoolsSearchResultDataDto,
     AxiosError,
     Req
   >({
     meta: { disableSuccessAlert: true },
-    mutationFn: async req => {
+    mutationFn: async (req) => {
       const { data } = await schoolsSearchApi.getSchoolsSearch(
         req.pageSize,
         req.page,
         req.params,
         req.sortOrder,
-        req.sortBy,
+        req.sortBy
       );
 
-      return data;
+      return data.data;
     },
   });
 

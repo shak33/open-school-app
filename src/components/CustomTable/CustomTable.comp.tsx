@@ -14,7 +14,7 @@ import { useCustomTableStore } from '@/components/CustomTable/models/CustomTable
 import { Loader } from '@/components/Loader/Loader.comp';
 import { FaSort } from 'react-icons/fa';
 import { FaSortUp, FaSortDown } from 'react-icons/fa6';
-import { CustomTableFooter } from '@/components/CustomTable/components/CustomTableFooter.comp';
+import { CustomTableFooter } from '@/components/CustomTable/components/CustomTableFooter/CustomTableFooter.comp';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
 type CustomTableRowComponent<ROW_ITEM_MODEL extends object> = React.FC<{
@@ -31,11 +31,11 @@ interface BasicRequestProps<
   SORT_BY_COLUMN_NAME_MODEL extends string,
   PARAMS extends object
 > {
-  page: string;
-  pageSize: string;
+  page?: string;
+  pageSize?: string;
   sortBy?: SORT_BY_COLUMN_NAME_MODEL;
   sortOrder?: SortDirectionDto;
-  params: PARAMS;
+  params?: PARAMS;
 }
 
 interface Props<
@@ -126,42 +126,30 @@ export const CustomTable = <
   const handleRequestSort = useCallback(
     (sortBy: SORT_BY_COLUMN_NAME_MODEL) => async () => {
       const resolvedSortOrder = resolveOrder(sortOrder);
-      const tableData = await getTableDataRequest({
-        page,
-        pageSize,
-        sortBy,
-        sortOrder: resolvedSortOrder,
-        params,
-      });
-
-      setData(tableData);
       setSortBy(sortBy);
       setSortOrder(resolvedSortOrder);
     },
-    [data, page, pageSize, sortBy, sortOrder, params, getTableDataRequest]
+    [sortOrder, sortBy]
   );
 
   const handleChangeRowsPerPage = useCallback(
     (pageSize: string) => {
-      const fetchData = async () => {
-        const tableData = await getTableDataRequest({
-          page,
-          pageSize,
-          sortBy,
-          sortOrder,
-          params,
-        });
-
-        setData(tableData);
-        setPageSize(pageSize);
-      };
-
-      fetchData();
+      setPageSize(pageSize);
     },
-    [data, page, sortBy, sortOrder, params, pageSize, getTableDataRequest]
+    [pageSize]
   );
 
   useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+
+    params.set('page', page);
+    params.set('pageSize', pageSize);
+    params.set('sortBy', sortBy);
+    params.set('sortOrder', sortOrder);
+    params.set('params', JSON.stringify(params));
+
+    replace(`${pathname}?${params.toString()}`);
+
     const fetchData = async () => {
       const tableData = await getTableDataRequest({
         page,
@@ -175,19 +163,7 @@ export const CustomTable = <
     };
 
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-
-    params.set('page', page);
-    params.set('pageSize', pageSize);
-    params.set('sortBy', sortBy);
-    params.set('sortOrder', sortOrder);
-    params.set('params', JSON.stringify(params));
-
-    replace(`${pathname}?${params.toString()}`);
-  }, []);
+  }, [page, pageSize, sortBy, sortOrder, params]);
 
   if (isLoading) {
     return (
@@ -223,7 +199,7 @@ export const CustomTable = <
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.data?.items.map((row) => (
+          {data?.items.map((row) => (
             <CustomTableRow key={row[idKey] as string} row={row} />
           ))}
         </TableBody>
@@ -234,8 +210,8 @@ export const CustomTable = <
         ROW_ITEM_MODEL
       >
         handleChangeRowsPerPage={handleChangeRowsPerPage}
-        totalPages={data?.data?.totalPages.toString()}
-        totalResults={data?.data?.totalResults.toString()}
+        totalPages={data?.totalPages.toString()}
+        totalResults={data?.totalResults.toString()}
       />
     </>
   );
