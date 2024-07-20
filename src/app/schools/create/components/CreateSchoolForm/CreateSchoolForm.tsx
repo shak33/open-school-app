@@ -17,6 +17,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useCreateSchool } from '@/app/schools/create/utils/useCreateSchool.util';
 import { useRouter } from 'next/navigation';
+import { CountriesSelect } from '@/components/CountriesSelect/CountriesSelect.comp';
 
 export const CreateSchoolForm: React.FC = () => {
   const { createSchool } = useCreateSchool();
@@ -30,6 +31,8 @@ export const CreateSchoolForm: React.FC = () => {
     await createSchool(form);
     router.push('/schools');
   };
+
+  console.log(formMethods.getValues('country'));
 
   return (
     <Form {...formMethods}>
@@ -50,22 +53,11 @@ export const CreateSchoolForm: React.FC = () => {
         />
         <FormField
           control={formMethods.control}
-          name="addressLine1"
+          name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Address line #1</FormLabel>
-              <Input placeholder="Enter school address" {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={formMethods.control}
-          name="addressLine2"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Address line #2</FormLabel>
-              <Input placeholder="Enter school address" {...field} />
+              <FormLabel>Country</FormLabel>
+              <CountriesSelect name="country" value={field.value} />
               <FormMessage />
             </FormItem>
           )}
@@ -88,6 +80,28 @@ export const CreateSchoolForm: React.FC = () => {
             <FormItem>
               <FormLabel>Zip code</FormLabel>
               <Input placeholder="Enter school zip code" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={formMethods.control}
+          name="addressLine1"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Address line #1</FormLabel>
+              <Input placeholder="Enter school address" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={formMethods.control}
+          name="addressLine2"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Address line #2</FormLabel>
+              <Input placeholder="Enter school address" {...field} />
               <FormMessage />
             </FormItem>
           )}

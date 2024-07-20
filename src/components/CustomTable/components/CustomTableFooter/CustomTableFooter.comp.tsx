@@ -1,10 +1,3 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { useCustomTableStore } from '@/components/CustomTable/models/CustomTableState.store';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,6 +6,8 @@ import {
   MdOutlineKeyboardArrowRight,
   MdOutlineKeyboardDoubleArrowRight,
 } from 'react-icons/md';
+import Select, { SingleValue } from 'react-select';
+import { CustomTableFooterRowsPerPage } from '@/components/CustomTable/components/CustomTableFooter/models/CustomTableFooterRowsPerPage.model';
 
 interface Props {
   handleChangeRowsPerPage: (value: string) => void;
@@ -55,6 +50,16 @@ export const CustomTableFooter = <
     setPage(totalPages);
   };
 
+  const onRowsPerPageChange = (
+    selectedValue: SingleValue<{ value: string }>
+  ) => {
+    if (!selectedValue) {
+      return;
+    }
+
+    handleChangeRowsPerPage(selectedValue.value);
+  };
+
   return (
     <div className="flex justify-between mt-10">
       <div className="inline-flex items-center">
@@ -63,17 +68,15 @@ export const CustomTableFooter = <
       <div className="inline-flex">
         <div className="inline-flex items-center mr-10">
           <div className="mr-3">{'Rows per page: '}</div>
-          <Select onValueChange={handleChangeRowsPerPage} value={pageSize}>
-            <SelectTrigger className="w-[75px]">
-              <SelectValue placeholder="10" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="10">10</SelectItem>
-              <SelectItem value="25">25</SelectItem>
-              <SelectItem value="50">50</SelectItem>
-              <SelectItem value="100">100</SelectItem>
-            </SelectContent>
-          </Select>
+          <Select
+            options={CustomTableFooterRowsPerPage}
+            name="rowsPerPage"
+            value={{
+              value: pageSize,
+              label: pageSize,
+            }}
+            onChange={onRowsPerPageChange}
+          />
         </div>
         <div className="inline-flex items-center">
           <Button
