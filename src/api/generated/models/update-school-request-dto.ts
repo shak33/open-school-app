@@ -31,6 +31,18 @@ export interface UpdateSchoolRequestDto {
      * @type {string}
      * @memberof UpdateSchoolRequestDto
      */
+    'country': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateSchoolRequestDto
+     */
+    'city': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateSchoolRequestDto
+     */
     'addressLine1': string;
     /**
      * 
@@ -38,12 +50,6 @@ export interface UpdateSchoolRequestDto {
      * @memberof UpdateSchoolRequestDto
      */
     'addressLine2'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateSchoolRequestDto
-     */
-    'city': string;
     /**
      * 
      * @type {string}
