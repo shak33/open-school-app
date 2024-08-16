@@ -31,6 +31,12 @@ export interface SchoolDto {
      * @type {string}
      * @memberof SchoolDto
      */
+    'country': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SchoolDto
+     */
     'addressLine1': string;
     /**
      * 
