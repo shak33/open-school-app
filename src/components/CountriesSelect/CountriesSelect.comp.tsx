@@ -1,6 +1,7 @@
 import { CustomSelect } from '@/components/form/CustomSelect/CustomSelect.comp';
 import Image from 'next/image';
 import { CustomSelectOption } from '@/components/form/CustomSelect/models/CustomSelectOption.model';
+import CountryList from 'country-list-with-dial-code-and-flag';
 
 interface Props {
   name: string;
@@ -8,38 +9,23 @@ interface Props {
 }
 
 export const CountriesSelect = ({ name, value }: Props) => {
-  const countriesList: CustomSelectOption<string>[] = [
-    {
-      value: 'us',
+  const countriesList: CustomSelectOption<string>[] = CountryList.getAll().map(
+    (country) => ({
+      value: country.code,
       label: (
         <div className="flex items-center">
           <Image
-            src="https://flagcdn.com/w20/us.png"
+            src={`https://flagcdn.com/w20/${country.code.toLowerCase()}.png`}
             width={20}
             height={20}
-            alt="United States flag"
+            alt={`${country.name} flag`}
             className="mr-2"
           />
-          {'United States'}
+          {country.name}
         </div>
       ),
-    },
-    {
-      value: 'pl',
-      label: (
-        <div className="flex items-center">
-          <Image
-            src="https://flagcdn.com/w20/pl.png"
-            width={20}
-            height={20}
-            alt="Poland flag"
-            className="mr-2"
-          />
-          {'Poland'}
-        </div>
-      ),
-    },
-  ];
+    })
+  );
 
   return <CustomSelect options={countriesList} name={name} value={value} />;
 };

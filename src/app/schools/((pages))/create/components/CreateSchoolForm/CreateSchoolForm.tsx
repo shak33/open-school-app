@@ -5,8 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   CreateSchoolFormModel,
   initialCreateSchoolFormValues,
-} from '@/app/schools/create/models/CreateSchoolForm.model';
-import { createSchoolFormValidation } from '@/app/schools/create/utils/createSchoolForm.validation';
+} from '@/app/schools/((pages))/create/models/CreateSchoolForm.model';
+import { createSchoolFormValidation } from '@/app/schools/((pages))/create/utils/createSchoolForm.validation';
 import {
   Form,
   FormField,
@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useCreateSchool } from '@/app/schools/create/utils/useCreateSchool.util';
+import { useCreateSchool } from '@/app/schools/((pages))/create/utils/useCreateSchool.util';
 import { useRouter } from 'next/navigation';
 import { CountriesSelect } from '@/components/CountriesSelect/CountriesSelect.comp';
 
@@ -31,8 +31,6 @@ export const CreateSchoolForm: React.FC = () => {
     await createSchool(form);
     router.push('/schools');
   };
-
-  console.log(formMethods.getValues('country'));
 
   return (
     <Form {...formMethods}>
