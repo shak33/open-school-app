@@ -3,6 +3,8 @@ import { ViewWrapper } from '@/components/ViewWrapper/ViewWrapper.comp';
 import { useGetSchoolData } from '@/app/schools/((pages))/[schoolId]/utils/useGetSchoolData.util';
 import { Loader } from '@/components/Loader/Loader.comp';
 import CountryList from 'country-list-with-dial-code-and-flag';
+import { SchoolUsersTable } from '@/components/Tables/SchoolUsersTable/SchoolUsersTable.comp';
+import { SchoolUserRoleDto } from '@/api/generated';
 
 type Props = {
   params: {
@@ -20,16 +22,16 @@ export default function SchoolPage({ params }: Props) {
 
   return (
     <ViewWrapper pageTitle={school?.name}>
-        <p>
-          {'Country: '}
-          <span className="font-bold">
-            {school?.country ? (
-              CountryList.findByCountryCode(school.country).map((country) => (
+      <p>
+        {'Country: '}
+        <span className="font-bold">
+          {school?.country
+            ? CountryList.findByCountryCode(school.country).map((country) => (
                 <span key={country.code}>{country.name}</span>
               ))
-            ) : '-'}
-          </span>
-        </p>
+            : '-'}
+        </span>
+      </p>
       <p>
         {'City: '} <span className="font-bold">{school?.city}</span>
       </p>
@@ -45,6 +47,7 @@ export default function SchoolPage({ params }: Props) {
         {'Postal code: '}
         <span className="font-bold">{school?.zip}</span>
       </p>
+      <SchoolUsersTable role={SchoolUserRoleDto.Teacher} schoolId={schoolId} />
     </ViewWrapper>
   );
 }

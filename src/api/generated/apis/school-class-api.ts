@@ -43,7 +43,8 @@ export const SchoolClassApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'schoolClassId' is not null or undefined
             assertParamExists('getSchoolClass', 'schoolClassId', schoolClassId)
             const localVarPath = `/api/v1/schools/{schoolId}/{schoolClassId}`
-                .replace(`{${"schoolId"}}`, encodeURIComponent(String(schoolId)));
+                .replace(`{${"schoolId"}}`, encodeURIComponent(String(schoolId)))
+                .replace(`{${"schoolClassId"}}`, encodeURIComponent(String(schoolClassId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -54,10 +55,6 @@ export const SchoolClassApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            if (schoolClassId !== undefined) {
-                localVarQueryParameter['schoolClassId'] = schoolClassId;
-            }
 
 
     
