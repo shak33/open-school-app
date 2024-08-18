@@ -6,21 +6,18 @@ import { useHandleGetSchoolUsersListRequest } from '@/components/Tables/SchoolUs
 import {
   SortBySchoolUsersSearchColumnDto,
   SchoolUsersSearchItemDto,
-  UserRoleDto,
+  SchoolUserRoleDto,
 } from '@/api/generated';
 import { SchoolUsersSearchFormModel } from '@/components/Tables/SchoolUsersTable/models/SchoolUsersSearchForm.model';
-import { useParams } from 'next/navigation';
 
 interface Props {
-  role?: UserRoleDto;
+  role: SchoolUserRoleDto;
+  schoolId: string;
 }
 
-export const SchoolUsersTable = ({ role }: Props) => {
-  const params = useParams();
+export const SchoolUsersTable = ({ role, schoolId }: Props) => {
   const { handleGetSchoolUsersListRequest, isLoading } =
-    useHandleGetSchoolUsersListRequest(params.schoolId);
-
-  console.log(params);
+    useHandleGetSchoolUsersListRequest({ role, schoolId });
 
   const tableHead = [
     {

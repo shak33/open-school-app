@@ -38,5 +38,11 @@ export interface FindSchoolUsersSearchRequestDto {
      * @memberof FindSchoolUsersSearchRequestDto
      */
     'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FindSchoolUsersSearchRequestDto
+     */
+    'role': string;
 }
 

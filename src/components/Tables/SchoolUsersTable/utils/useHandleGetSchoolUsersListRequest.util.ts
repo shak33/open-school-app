@@ -1,5 +1,6 @@
 import { useGetSchoolUsersList } from '@/components/Tables/SchoolUsersTable/utils/useSearchSchoolUsers.util';
 import {
+  SchoolUserRoleDto,
   SchoolUsersSearchResultDataDto,
   SortBySchoolUsersSearchColumnDto,
   SortDirectionDto,
@@ -15,6 +16,7 @@ export interface HandleGetSchoolsListRequestProps {
 }
 
 interface Props {
+  role: SchoolUserRoleDto;
   schoolId: string;
 }
 
@@ -26,8 +28,8 @@ type Return = {
 };
 
 export const useHandleGetSchoolUsersListRequest = ({
-  schoolId,
   role,
+  schoolId,
 }: Props): Return => {
   const { getSchoolUsersList, isGettingSchoolUsersList } =
     useGetSchoolUsersList();
@@ -44,11 +46,11 @@ export const useHandleGetSchoolUsersListRequest = ({
           firstName: props.params?.firstName ?? '',
           lastName: props.params?.lastName ?? '',
           email: props.params?.email ?? '',
-          schoolId,
           role,
         },
         sortOrder: props.sortOrder ?? SortDirectionDto.Asc,
         sortBy: props.sortBy ?? SortBySchoolUsersSearchColumnDto.LastName,
+        schoolId,
       });
     },
   };

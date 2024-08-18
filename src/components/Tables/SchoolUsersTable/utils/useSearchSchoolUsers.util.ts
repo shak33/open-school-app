@@ -14,6 +14,7 @@ type Req = {
   sortOrder?: SortDirectionDto;
   params: FindSchoolUsersSearchRequestDto;
   sortBy?: SortBySchoolUsersSearchColumnDto;
+  schoolId: string;
 };
 
 type Return = {
@@ -26,7 +27,7 @@ export const useGetSchoolUsersList = (): Return => {
   const { schoolUsersSearchApi } = useSchoolUsersListApiClient();
 
   const { isError, mutateAsync, isPending } = useMutation<
-  SchoolUsersSearchResultDataDto,
+    SchoolUsersSearchResultDataDto,
     AxiosError,
     Req
   >({
@@ -35,9 +36,10 @@ export const useGetSchoolUsersList = (): Return => {
       const { data } = await schoolUsersSearchApi.getSchoolUsersSearch(
         req.pageSize,
         req.page,
+        req.schoolId,
         req.params,
         req.sortOrder,
-        req.sortBy
+        req.sortBy,
       );
 
       return data.data;

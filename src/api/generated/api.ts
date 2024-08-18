@@ -15,6 +15,7 @@
 
 
 export * from './apis/auth-api';
+export * from './apis/dictionaries-api';
 export * from './apis/me-api';
 export * from './apis/school-class-api';
 export * from './apis/school-users-search-api';

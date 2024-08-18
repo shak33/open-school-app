@@ -40,20 +40,24 @@ export const SchoolUsersSearchApiAxiosParamCreator = function (configuration?: C
          * @summary Get school\'s users search
          * @param {string} pageSize 
          * @param {string} page 
+         * @param {string} schoolId School id
          * @param {FindSchoolUsersSearchRequestDto} findSchoolUsersSearchRequestDto Find school users request
          * @param {SortDirectionDto} [sortOrder] 
          * @param {SortBySchoolUsersSearchColumnDto} [sortBy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSchoolUsersSearch: async (pageSize: string, page: string, findSchoolUsersSearchRequestDto: FindSchoolUsersSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolUsersSearchColumnDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSchoolUsersSearch: async (pageSize: string, page: string, schoolId: string, findSchoolUsersSearchRequestDto: FindSchoolUsersSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolUsersSearchColumnDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'pageSize' is not null or undefined
             assertParamExists('getSchoolUsersSearch', 'pageSize', pageSize)
             // verify required parameter 'page' is not null or undefined
             assertParamExists('getSchoolUsersSearch', 'page', page)
+            // verify required parameter 'schoolId' is not null or undefined
+            assertParamExists('getSchoolUsersSearch', 'schoolId', schoolId)
             // verify required parameter 'findSchoolUsersSearchRequestDto' is not null or undefined
             assertParamExists('getSchoolUsersSearch', 'findSchoolUsersSearchRequestDto', findSchoolUsersSearchRequestDto)
-            const localVarPath = `/api/v1/schools/{schoolId}/users}`;
+            const localVarPath = `/api/v1/schools/{schoolId}/users/list`
+                .replace(`{${"schoolId"}}`, encodeURIComponent(String(schoolId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -110,14 +114,15 @@ export const SchoolUsersSearchApiFp = function(configuration?: Configuration) {
          * @summary Get school\'s users search
          * @param {string} pageSize 
          * @param {string} page 
+         * @param {string} schoolId School id
          * @param {FindSchoolUsersSearchRequestDto} findSchoolUsersSearchRequestDto Find school users request
          * @param {SortDirectionDto} [sortOrder] 
          * @param {SortBySchoolUsersSearchColumnDto} [sortBy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSchoolUsersSearch(pageSize: string, page: string, findSchoolUsersSearchRequestDto: FindSchoolUsersSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolUsersSearchColumnDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SchoolUsersSearchResultDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSchoolUsersSearch(pageSize, page, findSchoolUsersSearchRequestDto, sortOrder, sortBy, options);
+        async getSchoolUsersSearch(pageSize: string, page: string, schoolId: string, findSchoolUsersSearchRequestDto: FindSchoolUsersSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolUsersSearchColumnDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SchoolUsersSearchResultDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSchoolUsersSearch(pageSize, page, schoolId, findSchoolUsersSearchRequestDto, sortOrder, sortBy, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SchoolUsersSearchApi.getSchoolUsersSearch']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -137,14 +142,15 @@ export const SchoolUsersSearchApiFactory = function (configuration?: Configurati
          * @summary Get school\'s users search
          * @param {string} pageSize 
          * @param {string} page 
+         * @param {string} schoolId School id
          * @param {FindSchoolUsersSearchRequestDto} findSchoolUsersSearchRequestDto Find school users request
          * @param {SortDirectionDto} [sortOrder] 
          * @param {SortBySchoolUsersSearchColumnDto} [sortBy] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSchoolUsersSearch(pageSize: string, page: string, findSchoolUsersSearchRequestDto: FindSchoolUsersSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolUsersSearchColumnDto, options?: any): AxiosPromise<SchoolUsersSearchResultDto> {
-            return localVarFp.getSchoolUsersSearch(pageSize, page, findSchoolUsersSearchRequestDto, sortOrder, sortBy, options).then((request) => request(axios, basePath));
+        getSchoolUsersSearch(pageSize: string, page: string, schoolId: string, findSchoolUsersSearchRequestDto: FindSchoolUsersSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolUsersSearchColumnDto, options?: any): AxiosPromise<SchoolUsersSearchResultDto> {
+            return localVarFp.getSchoolUsersSearch(pageSize, page, schoolId, findSchoolUsersSearchRequestDto, sortOrder, sortBy, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -160,6 +166,7 @@ export interface SchoolUsersSearchApiInterface {
      * @summary Get school\'s users search
      * @param {string} pageSize 
      * @param {string} page 
+     * @param {string} schoolId School id
      * @param {FindSchoolUsersSearchRequestDto} findSchoolUsersSearchRequestDto Find school users request
      * @param {SortDirectionDto} [sortOrder] 
      * @param {SortBySchoolUsersSearchColumnDto} [sortBy] 
@@ -167,7 +174,7 @@ export interface SchoolUsersSearchApiInterface {
      * @throws {RequiredError}
      * @memberof SchoolUsersSearchApiInterface
      */
-    getSchoolUsersSearch(pageSize: string, page: string, findSchoolUsersSearchRequestDto: FindSchoolUsersSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolUsersSearchColumnDto, options?: RawAxiosRequestConfig): AxiosPromise<SchoolUsersSearchResultDto>;
+    getSchoolUsersSearch(pageSize: string, page: string, schoolId: string, findSchoolUsersSearchRequestDto: FindSchoolUsersSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolUsersSearchColumnDto, options?: RawAxiosRequestConfig): AxiosPromise<SchoolUsersSearchResultDto>;
 
 }
 
@@ -183,6 +190,7 @@ export class SchoolUsersSearchApi extends BaseAPI implements SchoolUsersSearchAp
      * @summary Get school\'s users search
      * @param {string} pageSize 
      * @param {string} page 
+     * @param {string} schoolId School id
      * @param {FindSchoolUsersSearchRequestDto} findSchoolUsersSearchRequestDto Find school users request
      * @param {SortDirectionDto} [sortOrder] 
      * @param {SortBySchoolUsersSearchColumnDto} [sortBy] 
@@ -190,8 +198,8 @@ export class SchoolUsersSearchApi extends BaseAPI implements SchoolUsersSearchAp
      * @throws {RequiredError}
      * @memberof SchoolUsersSearchApi
      */
-    public getSchoolUsersSearch(pageSize: string, page: string, findSchoolUsersSearchRequestDto: FindSchoolUsersSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolUsersSearchColumnDto, options?: RawAxiosRequestConfig) {
-        return SchoolUsersSearchApiFp(this.configuration).getSchoolUsersSearch(pageSize, page, findSchoolUsersSearchRequestDto, sortOrder, sortBy, options).then((request) => request(this.axios, this.basePath));
+    public getSchoolUsersSearch(pageSize: string, page: string, schoolId: string, findSchoolUsersSearchRequestDto: FindSchoolUsersSearchRequestDto, sortOrder?: SortDirectionDto, sortBy?: SortBySchoolUsersSearchColumnDto, options?: RawAxiosRequestConfig) {
+        return SchoolUsersSearchApiFp(this.configuration).getSchoolUsersSearch(pageSize, page, schoolId, findSchoolUsersSearchRequestDto, sortOrder, sortBy, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

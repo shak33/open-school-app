@@ -20,13 +20,15 @@
  * @enum {string}
  */
 
-export const UserRoleDto = {
-    SuperAdmin: 'SUPER_ADMIN',
+export const SchoolUserRoleDto = {
     Admin: 'ADMIN',
-    User: 'USER'
+    User: 'USER',
+    Teacher: 'TEACHER',
+    Parent: 'PARENT',
+    Student: 'STUDENT'
 } as const;
 
-export type UserRoleDto = typeof UserRoleDto[keyof typeof UserRoleDto];
+export type SchoolUserRoleDto = typeof SchoolUserRoleDto[keyof typeof SchoolUserRoleDto];
 
 
 
