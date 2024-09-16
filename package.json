@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "generate:api": "sh ./api-generator/generate-api.sh main",
-    "test": "jest test --watch --coverage"
+    "test": "jest test --coverage",
+    "test-watch": "jest test --watch --coverage"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.7.0",
