@@ -24,11 +24,6 @@ jobs:
     - name: Build app
       run: npm run build
 
-    - name: Set up AWS CLI
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        aws-region: 'eu-north-1'
-
     - name: Upload files to EC2
       run: |
         scp -i ${{ secrets.EC2_SSH_KEY }} -o StrictHostKeyChecking=no -r ./.next ec2-user@${{ secrets.EC2_PUBLIC_IP }}:/home/ec2-user/open-school-app
