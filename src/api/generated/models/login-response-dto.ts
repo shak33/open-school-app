@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { LoginResponseDataDto } from './login-response-data-dto';
+import type { LoginDataDto } from './login-data-dto';
 
 /**
  * 
@@ -25,10 +25,10 @@ import type { LoginResponseDataDto } from './login-response-data-dto';
 export interface LoginResponseDto {
     /**
      * 
-     * @type {LoginResponseDataDto}
+     * @type {LoginDataDto}
      * @memberof LoginResponseDto
      */
-    'data': LoginResponseDataDto;
+    'data': LoginDataDto;
     /**
      * 
      * @type {string}

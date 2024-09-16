@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import { MeResponseDataDto } from '@/api/generated/models';
+import { CurrentUserDto } from '@/api/generated/models';
 
 interface CurrentUserStore {
-  currentUser: MeResponseDataDto | null;
-  setCurrentUser: (currentUser: MeResponseDataDto | null) => void;
+  currentUser: CurrentUserDto | null;
+  setCurrentUser: (currentUser: CurrentUserDto | null) => void;
 }
 
 export const useGetCurrentUserStore = create<CurrentUserStore>((set) => ({

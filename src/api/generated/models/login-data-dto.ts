@@ -20,26 +20,20 @@ import type { CurrentUserDto } from './current-user-dto';
 /**
  * 
  * @export
- * @interface MeResponseDto
+ * @interface LoginDataDto
  */
-export interface MeResponseDto {
-    /**
-     * 
-     * @type {CurrentUserDto}
-     * @memberof MeResponseDto
-     */
-    'data': CurrentUserDto;
+export interface LoginDataDto {
     /**
      * 
      * @type {string}
-     * @memberof MeResponseDto
+     * @memberof LoginDataDto
      */
-    'message': string;
+    'token': string;
     /**
      * 
-     * @type {boolean}
-     * @memberof MeResponseDto
+     * @type {CurrentUserDto}
+     * @memberof LoginDataDto
      */
-    'success': boolean;
+    'user': CurrentUserDto;
 }
 

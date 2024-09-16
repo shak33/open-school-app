@@ -13,42 +13,50 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UserRoleDto } from './user-role-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UuidDto } from './uuid-dto';
 
 /**
  * 
  * @export
- * @interface LoginResponseDataUserDto
+ * @interface CurrentUserDto
  */
-export interface LoginResponseDataUserDto {
+export interface CurrentUserDto {
     /**
      * 
-     * @type {string}
-     * @memberof LoginResponseDataUserDto
+     * @type {UuidDto}
+     * @memberof CurrentUserDto
      */
-    '_id': string;
+    '_id': UuidDto;
     /**
      * 
      * @type {string}
-     * @memberof LoginResponseDataUserDto
+     * @memberof CurrentUserDto
      */
     'email': string;
     /**
      * 
      * @type {string}
-     * @memberof LoginResponseDataUserDto
+     * @memberof CurrentUserDto
      */
     'firstName': string;
     /**
      * 
      * @type {string}
-     * @memberof LoginResponseDataUserDto
+     * @memberof CurrentUserDto
      */
     'lastName': string;
     /**
      * 
-     * @type {Array<string>}
-     * @memberof LoginResponseDataUserDto
+     * @type {UserRoleDto}
+     * @memberof CurrentUserDto
      */
-    'roles': Array<string>;
+    'role': UserRoleDto;
 }
+
+
 

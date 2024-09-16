@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { RegisterResponseDataDto } from './register-response-data-dto';
+import type { RegisterDataDto } from './register-data-dto';
 
 /**
  * 
@@ -25,10 +25,10 @@ import type { RegisterResponseDataDto } from './register-response-data-dto';
 export interface RegisterResponseDto {
     /**
      * 
-     * @type {RegisterResponseDataDto}
+     * @type {RegisterDataDto}
      * @memberof RegisterResponseDto
      */
-    'data': RegisterResponseDataDto;
+    'data': RegisterDataDto;
     /**
      * 
      * @type {string}

@@ -1,13 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import {
-  RegisterRequestDto,
-  RegisterResponseDataDto,
-} from '@/api/generated/models';
+import { RegisterRequestDto, RegisterDataDto } from '@/api/generated/models';
 import { useAuthApiClient } from '@/api/utils/useAuthApiClient.util';
 
 type Return = {
-  register: (req: RegisterRequestDto) => Promise<RegisterResponseDataDto>;
+  register: (req: RegisterRequestDto) => Promise<RegisterDataDto>;
   isRegisterLoading: boolean;
   isRegisterError: boolean;
 };
@@ -16,7 +13,7 @@ export const useRegister = (): Return => {
   const { authApiClient } = useAuthApiClient();
 
   const { mutateAsync, isPending, isError } = useMutation<
-    RegisterResponseDataDto,
+    RegisterDataDto,
     AxiosError,
     RegisterRequestDto
   >({

@@ -15,25 +15,25 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { RegisterResponseDataUserDto } from './register-response-data-user-dto';
+import type { CurrentUserDto } from './current-user-dto';
 
 /**
  * 
  * @export
- * @interface RegisterResponseDataDto
+ * @interface RegisterDataDto
  */
-export interface RegisterResponseDataDto {
+export interface RegisterDataDto {
     /**
      * 
      * @type {string}
-     * @memberof RegisterResponseDataDto
+     * @memberof RegisterDataDto
      */
     'token': string;
     /**
      * 
-     * @type {RegisterResponseDataUserDto}
-     * @memberof RegisterResponseDataDto
+     * @type {CurrentUserDto}
+     * @memberof RegisterDataDto
      */
-    'user': RegisterResponseDataUserDto;
+    'user': CurrentUserDto;
 }
 

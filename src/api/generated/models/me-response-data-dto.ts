@@ -16,6 +16,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { UserRoleDto } from './user-role-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UuidDto } from './uuid-dto';
 
 /**
  * 
@@ -25,10 +28,10 @@ import type { UserRoleDto } from './user-role-dto';
 export interface MeResponseDataDto {
     /**
      * 
-     * @type {string}
+     * @type {UuidDto}
      * @memberof MeResponseDataDto
      */
-    '_id': string;
+    '_id': UuidDto;
     /**
      * 
      * @type {string}
