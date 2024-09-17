@@ -18,7 +18,7 @@ jobs:
 
     - name: Upload files to EC2
       run: |
-        scp -i /tmp/ec2_key -o StrictHostKeyChecking=no -r . ubuntu@${{ secrets.EC2_PUBLIC_IP }}:/home/ubuntu/open-school-app
+        scp -i /tmp/ec2_key -o StrictHostKeyChecking=no -r * ubuntu@${{ secrets.EC2_PUBLIC_IP }}:/home/ubuntu/open-school-app
 
     - name: Deploy on EC2
       run: |
