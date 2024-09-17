@@ -9,9 +9,8 @@ on:
       - develop
 
 jobs:
-  build:
+  install:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -32,8 +31,48 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Upload node_modules cache
+      uses: actions/upload-artifact@v3
+      with:
+        name: node_modules
+        path: node_modules
+
+  test:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download node_modules
+      uses: actions/download-artifact@v3
+      with:
+        name: node_modules
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '21.7.3'
+
     - name: Run tests
       run: npm run test
+
+  build:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download node_modules
+      uses: actions/download-artifact@v3
+      with:
+        name: node_modules
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '21.7.3'
 
     - name: Build app
       run: npm run build
