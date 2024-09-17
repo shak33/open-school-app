@@ -31,11 +31,14 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Upload node_modules cache
+    - name: Compress node_modules
+      run: tar -czf node_modules.tar.gz node_modules
+
+    - name: Upload compressed node_modules
       uses: actions/upload-artifact@v3
       with:
         name: node_modules
-        path: node_modules
+        path: node_modules.tar.gz
 
   test:
     runs-on: ubuntu-latest
@@ -44,10 +47,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Download node_modules
+    - name: Download compressed node_modules
       uses: actions/download-artifact@v3
       with:
         name: node_modules
+
+    - name: Decompress node_modules
+      run: tar -xzf node_modules.tar.gz
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -64,10 +70,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Download node_modules
+    - name: Download compressed node_modules
       uses: actions/download-artifact@v3
       with:
         name: node_modules
+
+    - name: Decompress node_modules
+      run: tar -xzf node_modules.tar.gz
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
