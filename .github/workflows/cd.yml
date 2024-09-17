@@ -17,7 +17,10 @@ jobs:
       run: echo "${{ secrets.EC2_SSH_KEY }}" > /tmp/ec2_key && chmod 400 /tmp/ec2_key
 
     - name: Create archive
-      run: tar -czf app.tar.gz ./
+      run: |
+        rsync -a --exclude='node_modules' --exclude='.git' . temp/
+        tar -czf app.tar.gz temp
+        rm -rf temp
 
     - name: Upload archive to EC2
       run: |
